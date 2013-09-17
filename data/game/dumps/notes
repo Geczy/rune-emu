@@ -1,0 +1,106 @@
+bit state 4893
+==============
+
++ banking
+
+0 - no tab (search mode)
+1 - all tabs
+2 - tab 1
+3 - tab 2
+4 - tab 3
+5 - tab 4
+6 - tab 5
+7 - tab 6
+
+bit state 4885-4892
+===================
+
++ banking
+
+0-511 value denoting where the first item of tab 2-9 is
+
+containers
+===================
+
+93  - inventory
+94  - equipment
+95  - bank
+134 - stake
+140 - clue scroll puzzle box
+141 - clue scroll rewards
+347 - pizazz reward shop
+482 - custom fur clothing
+
+dialogues
+=====================
+types: conversation
+       option
+       text
+64 - single line right oriented 
+    + comp 5: continue
+65 - double line right oriented 
+    + comp 6: continue
+66 - triple line right oriented 
+    + comp 7: continue
+67 - quad line right oriented 
+    + comp 8: continue
+68 - single line right oriented no input
+69 - double line right oriented no input
+70 - triple line right oriented no input
+71 - quad line right oriented no input
+210 - single line text prompt
+211 - double line text prompt
+212 - triple line text prompt
+213 - quad line text prompt
+214 - single line text prompt no input
+215 - double line text prompt no input
+216 - triple line text prompt no input
+217 - quad line text prompt no input
+228 - double option
+    + comp 2 : option 1
+    + comp 3 : option 2
+229 - double option
+    + comp 2 : option 1
+    + comp 3 : option 2
+230 - triple option
+    + comp 2 : option 1
+    + comp 3 : option 2
+    + comp 4 : option 3
+231 - triple option
+    + comp 2 : option 1
+    + comp 3 : option 2
+    + comp 4 : option 3
+232 - quad option
+    + comp 2 : option 1
+    + comp 3 : option 2
+    + comp 4 : option 3
+    + comp 5 : option 4
+233 - quad option
+    + comp 2 : option 1
+    + comp 3 : option 2
+    + comp 4 : option 3
+    + comp 5 : option 4
+234 - pent option
+    + comp 2 : option 1
+    + comp 3 : option 2
+    + comp 4 : option 3
+    + comp 5 : option 4
+    + comp 6 : option 5
+235 - pent option
+    + comp 2 : option 1
+    + comp 3 : option 2
+    + comp 4 : option 3
+    + comp 5 : option 4
+    + comp 6 : option 5
+241 - single line right oriented 
+	+ comp 5: continue
+242 - double line right oriented 
+	+ comp 6: continue
+243 - triple line right oriented 
+	+ comp 7: continue
+244 - quad line right oriented 
+	+ comp 8: continue
+245 - single line right oriented no input
+246 - double line right oriented no input
+247 - triple line right oriented no input
+248 - quad line right oriented no input

@@ -1,0 +1,4 @@
+{
+	"scripts" : [ "commands.rb", "skill_menu.rb" ],
+	"dependencies" : []
+}

@@ -1,0 +1,4 @@
+{
+	"scripts" : [ "doors.rb" ],
+	"dependencies" : []
+}
