@@ -1,4 +1,5 @@
 {
+	"about" : "A plugin that is used by the development team to test out new integration features",
 	"scripts" : [ "test.rb" ],
 	"dependencies" : []
 }
