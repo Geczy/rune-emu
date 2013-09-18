@@ -45,6 +45,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import net.scapeemulator.game.model.definition.NPCDefinitions;
 
 public final class GameServer {
 
@@ -106,6 +107,7 @@ public final class GameServer {
         ObjectDefinitions.init(cache);
         WidgetDefinitions.init(cache);
         VarbitDefinitions.init(cache);
+        NPCDefinitions.init(cache);
 		EquipmentDefinition.init();
 
         /* load all the maps into memory */

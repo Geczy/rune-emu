@@ -182,7 +182,7 @@ public final class WidgetDefinition {
             String[] itemOptions = new String[var6];
 
             for (int var8 = 0; var6 > var8; ++var8) {
-                itemOptions[var8] = null;
+                itemOptions[var8] = ByteBufferUtils.getJagexString(buffer);
             }
         }
 
