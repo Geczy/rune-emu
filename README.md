@@ -2,13 +2,15 @@
 
 ## Authors
 
-SiniSoul
-Davidi2
+[SiniSoul](https://www.moparscape.org/smf/index.php?action=profile;u=449007)  
+[Davidi2](https://www.moparscape.org/smf/index.php?action=profile;u=324294)
 
 ## Dependencies
 
-Unzip to /data/game/cache/
-Decryption key listed in #mopardev IRC status.
+### Cache
 
-[Cache Download](https://mega.co.nz/#!YlNy2Yab) 
+Unzip to `/data/game/cache/`  
+Decryption key listed in `#mopardev` IRC status.
+
+[Download](https://mega.co.nz/#!YlNy2Yab) 
 
