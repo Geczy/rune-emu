@@ -21,11 +21,6 @@ public final class DialogueContext {
     
     private static final int LESS_OPTIONS = 1;
     private static final int MORE_OPTIONS = 5;
-        
-    /**
-     * The pattern used to split strings into chunks of characters for lines.
-     */
-    private static final String pattern;
     
     private final Player player;
     private final Dialogue dialogue;
@@ -124,7 +119,7 @@ public final class DialogueContext {
     }
         
     public void openPlayerConversationDialogue(String text, HeadAnimation animation, boolean displayInput) {
-        String[] chunks = text.split(pattern);
+        String[] chunks = split(text);
         if(chunks.length >= 5) {
             throw new IllegalArgumentException();
         }
@@ -141,7 +136,7 @@ public final class DialogueContext {
     }
     
     public void openNpcConversationDialogue(String text, int npcId, HeadAnimation animation, boolean displayInput) {
-         String[] chunks = text.split(pattern);
+        String[] chunks = split(text);
         if(chunks.length >= 5) {
             throw new IllegalArgumentException();
         }
@@ -158,7 +153,7 @@ public final class DialogueContext {
     }
     
     public void openTextDialogue(String text, boolean displayInput) {
-        String[] chunks = text.split(pattern);
+        String[] chunks = split(text);
         if(chunks.length >= 5) {
             throw new IllegalArgumentException();
         }
@@ -251,14 +246,18 @@ public final class DialogueContext {
         throw new IllegalArgumentException();
     }
     
-    static {
-        /* I can google shit */
-        int amountCharacters = 40;
-        StringBuilder builder = new StringBuilder("(?<=\\G");
-        for(int i = 0; i < amountCharacters; i++) {
-            builder.append('.');
+    private static String[] split(String str) {
+        StringBuilder builder = new StringBuilder();
+        int counter = 0;
+        for(char c : str.toCharArray()) {
+            if(counter >= 40 && c == ' ') {
+                builder.append("\n");
+                counter = 0;
+                continue;
+            }
+            builder.append(c);
+            counter++;
         }
-        builder.append(')');
-        pattern = builder.toString();
+        return builder.toString().split("\n");
     }
 }
