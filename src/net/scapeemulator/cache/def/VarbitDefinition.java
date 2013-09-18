@@ -42,9 +42,6 @@ public final class VarbitDefinition {
                 def.state = buffer.getShort() & 0xffff;
                 def.lowBit = buffer.get() & 0xff;
                 def.highBit = buffer.get() & 0xff;
-                System.out.println("state: " + def.state);
-                System.out.println("low: " + def.lowBit);
-                System.out.println("high: " + def.highBit);
             }
         }
         return def;

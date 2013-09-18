@@ -534,8 +534,6 @@ module RuneEmulator
 			def bind()
 				DOORS[@opened_door.position] = self
 				DOORS[@closed_door.position] = self
-				p @opened_door.position.to_s
-				p @closed_door.position.to_s
 			end
 		end
 

@@ -38,7 +38,6 @@ public final class WidgetDefinition {
     public static WidgetDefinition decode(ByteBuffer buffer, int hash) {
         WidgetDefinition definition = new WidgetDefinition();
         definition.hash = hash;
-        System.out.println("id: " + (hash >> 16) + ", component: " + (hash & 0xffff));
         if (buffer.get() == -1) {
             decodeNewFormat(definition, buffer);
         } else {
@@ -59,11 +58,8 @@ public final class WidgetDefinition {
             type &= 127;
             ByteBufferUtils.getString(buffer);
         }
-        
-        System.out.println("type: " + type);
 
         int contentType = buffer.getShort() & 0xffff;
-        System.out.println("content type: " + contentType);
         int x = buffer.getShort();
         int y = buffer.getShort();
         int width = buffer.getShort() & 0xffff;
@@ -138,7 +134,6 @@ public final class WidgetDefinition {
             }
 
             String disabledText = ByteBufferUtils.getString(buffer);
-            System.out.println(disabledText);
             int anInt205 = buffer.get() & 0xff;
             int textAlignment = buffer.get() & 0xff;
             int anInt225 = buffer.get() & 0xff;
@@ -159,7 +154,6 @@ public final class WidgetDefinition {
         }
 
         optionMask = ByteBufferUtils.getTriByte(buffer);
-        System.out.println("option mask: " + optionMask);
         int var4 = buffer.get() & 0xff;
         int var5;
         if (var4 != 0) {
@@ -188,7 +182,6 @@ public final class WidgetDefinition {
             String[] itemOptions = new String[var6];
 
             for (int var8 = 0; var6 > var8; ++var8) {
-                System.out.println(ByteBufferUtils.getString(buffer));
                 itemOptions[var8] = null;
             }
         }
@@ -269,7 +262,6 @@ public final class WidgetDefinition {
                     params[var5] = buffer.getInt();
                 }
             }           
-            System.out.println(Arrays.toString(params));
             return params;
         }
         return null;

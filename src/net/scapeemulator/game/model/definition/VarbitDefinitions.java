@@ -64,7 +64,6 @@ public class VarbitDefinitions {
 
 
                 int id = file * 1024 + member;
-                System.out.println("id: " + id);
                 VarbitDefinition definition = VarbitDefinition.decode(archive.getEntry(nonSparseMember++));
                 definitions[id] = definition;
                 count++;
