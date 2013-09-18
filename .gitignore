@@ -4,4 +4,17 @@
 *.jar
 *.war
 *.ear
+
+# Netbeans
+build/
+lib/
+dist/
+nbproject/
+build.xml
+
+# Eclipse
 .project
+
+# Junk
+run.bat
+run.sh
