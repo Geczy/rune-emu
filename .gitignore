@@ -14,7 +14,10 @@ build.xml
 
 # Eclipse
 .project
+.classpath
 
 # Junk
 run.bat
 run.sh
+/bin
+dependencies/
