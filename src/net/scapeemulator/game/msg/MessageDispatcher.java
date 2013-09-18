@@ -9,6 +9,7 @@ import net.scapeemulator.game.item.ItemOnObjectDispatcher;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.handler.*;
 import net.scapeemulator.game.msg.handler.inter.ButtonOptionMessageHandler;
+import net.scapeemulator.game.msg.handler.item.ItemOnItemMessageHandler;
 import net.scapeemulator.game.msg.handler.item.ItemOnObjectMessageHandler;
 import net.scapeemulator.game.msg.handler.item.ItemOptionMessageHandler;
 import net.scapeemulator.game.msg.handler.object.ObjectOptionMessageHandler;
