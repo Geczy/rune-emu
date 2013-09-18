@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package net.scapeemulator.game.msg.handler;
+package net.scapeemulator.game.msg.handler.item;
 
 import net.scapeemulator.game.item.ItemOnItemDispatcher;
 import net.scapeemulator.game.model.player.Player;
