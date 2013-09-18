@@ -8,8 +8,12 @@ import net.scapeemulator.game.net.game.GameFrame.Type;
 import net.scapeemulator.util.crypto.StreamCipher;
 
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class GameFrameDecoder extends ByteToMessageDecoder {
+    
+    private static final Logger logger = LoggerFactory.getLogger(GameFrameDecoder.class);
 
 	private static final int[] SIZES = new int[256];
 	static {
@@ -294,7 +298,9 @@ public final class GameFrameDecoder extends ByteToMessageDecoder {
 			size = SIZES[opcode];
 
 			if (size == -3) {
-				throw new IOException("Illegal opcode " + opcode + ".");
+                            logger.info("invalid opcode: " + opcode);
+                            ctx.close();
+                            return;
                         }
 
 			variable = size == -1;
