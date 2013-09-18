@@ -1,3 +1,6 @@
+require 'java'
+
+java_import 'net.scapeemulator.game.GameServer'
 # Common administrator commands
 
 RuneEmulator::Bootstrap.bind_cmd('window') { |player, args|
@@ -22,4 +25,8 @@ RuneEmulator::Bootstrap.bind_cmd('bitstate') { |player, args|
 
 RuneEmulator::Bootstrap.bind_cmd('state') { |player, args|
 	player.state_set.set_state(args[0].to_i, args[1].to_i)
+}
+
+RuneEmulator::Bootstrap.bind_cmd('reload') { |player, args|
+  GameServer::plugin_loader.reload('./data/game/plugins/')
 }

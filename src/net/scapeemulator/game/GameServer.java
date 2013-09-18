@@ -91,7 +91,7 @@ public final class GameServer {
 	private final LandscapeKeyTable landscapeKeyTable;
 	private final CodecRepository codecRepository;
 	private final MessageDispatcher messageDispatcher;
-    private final PluginLoader pluginLoader;
+    private static final PluginLoader pluginLoader = new PluginLoader();
 	private final int version = 530;
 
 	public GameServer(SocketAddress loginAddress) throws IOException, ScriptException, SQLException {
@@ -122,7 +122,7 @@ public final class GameServer {
 
         /* load the server pluginLoader */
         ScriptContext scriptContext = new ScriptContext();
-        pluginLoader = new PluginLoader();
+        //pluginLoader = new PluginLoader();
         pluginLoader.setContext(scriptContext);
         pluginLoader.load("./data/game/plugins/");
 

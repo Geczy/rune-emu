@@ -50,7 +50,7 @@ public final class PluginLoader {
     /**
      * The JSON factory to create new JSON parsers with.
      */
-    private final JsonFactory factory = new JsonFactory();
+    private JsonFactory factory = new JsonFactory();
 
     /**
      * The ruby script environment for the plugin loader.
@@ -60,7 +60,7 @@ public final class PluginLoader {
     /**
      * The map that contains all the parsed plugin data.
      */
-    private final Map<String, PluginData> parsedPluginData = new HashMap<>();
+    private Map<String, PluginData> parsedPluginData = new HashMap<>();
 
     /**
      * The set of plugins that have had their scripts loaded.
@@ -188,5 +188,13 @@ public final class PluginLoader {
 
         /* Note that the plugin has been loaded */
         loadedPlugins.add(name);
+    }
+    
+    public void reload(String dir) throws IOException, ScriptException {
+    	factory = new JsonFactory();
+    	scriptEnvironment = new RubyScriptEnvironment();
+    	parsedPluginData = new HashMap<>();
+    	loadedPlugins = new HashSet<>();
+    	load(new File(dir));
     }
 }
