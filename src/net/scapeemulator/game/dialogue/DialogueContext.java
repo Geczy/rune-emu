@@ -2,6 +2,7 @@ package net.scapeemulator.game.dialogue;
 
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.inter.InterfaceAnimationMessage;
+import net.scapeemulator.game.msg.impl.inter.InterfaceNPCHeadMessage;
 import net.scapeemulator.game.msg.impl.inter.InterfacePlayerHeadMessage;
 import org.codehaus.plexus.util.StringUtils;
 
@@ -15,6 +16,8 @@ public final class DialogueContext {
     private static final int OPTION_OFFSET = 228;
     private static final int RIGHT_CONVERSATION_OFFSET = 64;
     private static final int RIGHT_CONVERSATION_OFFSET_NO_INPUT = 68;
+    private static final int LEFT_CONVERSATION_OFFSET = 241;
+    private static final int LEFT_CONVERSATION_OFFSET_NO_INPUT = 245;
     
     private static final int LESS_OPTIONS = 1;
     private static final int MORE_OPTIONS = 5;
@@ -137,7 +140,20 @@ public final class DialogueContext {
         inputDisplayed = displayInput;
     }
     
-    public void openNpcConversationDialogue(String text, boolean displayInput) {
+    public void openNpcConversationDialogue(String text, int npcId, HeadAnimation animation, boolean displayInput) {
+         String[] chunks = text.split(pattern);
+        if(chunks.length >= 5) {
+            throw new IllegalArgumentException();
+        }
+        int id = (displayInput ? LEFT_CONVERSATION_OFFSET : LEFT_CONVERSATION_OFFSET_NO_INPUT) + chunks.length - 1;
+        for(int i = 0; i < chunks.length ; i++) {
+            player.setInterfaceText(id, i + 4, chunks[i]);
+        }
+        //player.setInterfaceText(id, 3, StringUtils.capitalise(player.getUsername()));
+        player.send(new InterfaceAnimationMessage(id, 2, animation.getAnimationId()));
+        player.send(new InterfaceNPCHeadMessage(id, 2, npcId));
+        player.getInterfaceSet().openChatbox(id);
+        dialogueType = DialogueType.PLAYER_CONVERSATION;
         inputDisplayed = displayInput;
     }
     

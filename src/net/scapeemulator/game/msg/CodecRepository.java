@@ -100,6 +100,7 @@ public final class CodecRepository {
         bind(new PlayerOptionMessageEncoder());
         bind(new InterfaceAccessMessageEncoder());
         bind(new InterfacePlayerHeadMessageEncoder());
+        bind(new InterfaceNPCHeadMessageEncoder());
         bind(new InterfaceAnimationMessageEncoder());
     }
 
