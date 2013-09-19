@@ -49,199 +49,197 @@ import net.scapeemulator.game.model.definition.NPCDefinitions;
 
 public final class GameServer {
 
-	private static final Logger logger = LoggerFactory.getLogger(GameServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameServer.class);
 
-	public static void main(String[] args) {
-		try {
-			InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
+    public static void main(String[] args) {
+        try {
+            InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
 
-			GameServer server = new GameServer(new InetSocketAddress(NetworkConstants.LOGIN_PORT));
+            GameServer server = new GameServer(new InetSocketAddress(NetworkConstants.LOGIN_PORT));
 
-			try {
-				server.httpBind(new InetSocketAddress(NetworkConstants.HTTP_PORT));
-			} catch (Throwable t) {
-				/* TODO: fix Netty's diagnostic message in this case */
-				logger.warn("Failed to bind to HTTP port.", t);
-			}
-			server.httpBind(new InetSocketAddress(NetworkConstants.HTTP_ALT_PORT));
+            try {
+                server.httpBind(new InetSocketAddress(NetworkConstants.HTTP_PORT));
+            } catch (Throwable t) {
+                /* TODO: fix Netty's diagnostic message in this case */
+                logger.warn("Failed to bind to HTTP port.", t);
+            }
+            server.httpBind(new InetSocketAddress(NetworkConstants.HTTP_ALT_PORT));
 
-			try {
-				server.serviceBind(new InetSocketAddress(NetworkConstants.SSL_PORT));
-			} catch (Throwable t) {
-				/* TODO: fix Netty's diagnostic message in this case */
-				logger.warn("Failed to bind to SSL port.", t);
-			}
-			server.serviceBind(new InetSocketAddress(NetworkConstants.GAME_PORT));
+            try {
+                server.serviceBind(new InetSocketAddress(NetworkConstants.SSL_PORT));
+            } catch (Throwable t) {
+                /* TODO: fix Netty's diagnostic message in this case */
+                logger.warn("Failed to bind to SSL port.", t);
+            }
+            server.serviceBind(new InetSocketAddress(NetworkConstants.GAME_PORT));
 
-			server.start();
-		} catch (Throwable t) {
-			logger.error("Failed to start server.", t);
-		}
-	}
+            server.start();
+        } catch (Throwable t) {
+            logger.error("Failed to start server.", t);
+        }
+    }
+    private final World world = World.getWorld();
+    private final ExecutorService executor = Executors.newCachedThreadPool();
+    private final EventLoopGroup loopGroup = new NioEventLoopGroup();
+    private final ServerBootstrap serviceBootstrap = new ServerBootstrap();
+    private final ServerBootstrap httpBootstrap = new ServerBootstrap();
+    private final LoginService loginService;
+    private final UpdateService updateService = new UpdateService();
+    private final Cache cache;
+    private final ChecksumTable checksumTable;
+    private final LandscapeKeyTable landscapeKeyTable;
+    private final CodecRepository codecRepository;
+    private final MessageDispatcher messageDispatcher;
+    private final PluginLoader pluginLoader;
+    private final int version = 530;
 
-	private final World world = World.getWorld();
-	private final ExecutorService executor = Executors.newCachedThreadPool();
-	private final EventLoopGroup loopGroup = new NioEventLoopGroup();
-	private final ServerBootstrap serviceBootstrap = new ServerBootstrap();
-	private final ServerBootstrap httpBootstrap = new ServerBootstrap();
-	private final LoginService loginService;
-	private final UpdateService updateService = new UpdateService();
-	private final Cache cache;
-	private final ChecksumTable checksumTable;
-	private final LandscapeKeyTable landscapeKeyTable;
-	private final CodecRepository codecRepository;
-	private final MessageDispatcher messageDispatcher;
-    private static final PluginLoader pluginLoader = new PluginLoader();
-	private final int version = 530;
+    public GameServer(SocketAddress loginAddress) throws IOException, ScriptException, SQLException {
+        logger.info("Starting ScapeEmulator game server...");
 
-	public GameServer(SocketAddress loginAddress) throws IOException, ScriptException, SQLException {
-		logger.info("Starting ScapeEmulator game server...");
+        /* load landscape keys */
+        landscapeKeyTable = LandscapeKeyTable.open("data/game/landscape-keys");
 
-		/* load landscape keys */
-		landscapeKeyTable = LandscapeKeyTable.open("data/game/landscape-keys");
-
-		/* load game cache */
-		cache = new Cache(FileStore.open("data/game/cache"));
-		checksumTable = cache.createChecksumTable();
-		ItemDefinitions.init(cache);
+        /* load game cache */
+        cache = new Cache(FileStore.open("data/game/cache"));
+        checksumTable = cache.createChecksumTable();
+        ItemDefinitions.init(cache);
         ObjectDefinitions.init(cache);
         WidgetDefinitions.init(cache);
         VarbitDefinitions.init(cache);
         NPCDefinitions.init(cache);
-		EquipmentDefinition.init();
+        EquipmentDefinition.init();
 
         /* load all the maps into memory */
         MapLoader loader = new MapLoader();
         loader.addListener(new GroundObjectPopulator(world.getGroundObjects()));
         loader.addListener(new MapDataListener(world.getTraversalMap()));
-		loader.load(cache, landscapeKeyTable);
+        loader.load(cache, landscapeKeyTable);
 
-		/* load message codecs and dispatcher */
-		codecRepository = new CodecRepository(landscapeKeyTable);
-		messageDispatcher = new MessageDispatcher();
+        /* load message codecs and dispatcher */
+        codecRepository = new CodecRepository(landscapeKeyTable);
+        messageDispatcher = new MessageDispatcher();
 
         /* load the server pluginLoader */
         ScriptContext scriptContext = new ScriptContext();
-        //pluginLoader = new PluginLoader();
+        pluginLoader = new PluginLoader();
         pluginLoader.setContext(scriptContext);
         pluginLoader.load("./data/game/plugins/");
 
         /* decorate each of the dispatchers */
         messageDispatcher.decorateDispatchers(scriptContext);
 
-		/* load player serializer from config file */
-		PlayerSerializer serializer = createPlayerSerializer();
-		logger.info("Using serializer: " + serializer + ".");
-		loginService = new LoginService(serializer);
+        /* load player serializer from config file */
+        PlayerSerializer serializer = createPlayerSerializer();
+        logger.info("Using serializer: " + serializer + ".");
+        loginService = new LoginService(serializer);
 
-		/* start netty */
-		httpBootstrap.group(loopGroup);
-		httpBootstrap.channel(NioServerSocketChannel.class);
-		httpBootstrap.childHandler(new HttpChannelInitializer());
-		serviceBootstrap.group(loopGroup);
-		serviceBootstrap.channel(NioServerSocketChannel.class);
-		serviceBootstrap.childHandler(new RsChannelInitializer(this));
-	}
+        /* start netty */
+        httpBootstrap.group(loopGroup);
+        httpBootstrap.channel(NioServerSocketChannel.class);
+        httpBootstrap.childHandler(new HttpChannelInitializer());
+        serviceBootstrap.group(loopGroup);
+        serviceBootstrap.channel(NioServerSocketChannel.class);
+        serviceBootstrap.childHandler(new RsChannelInitializer(this));
+    }
 
-	private PlayerSerializer createPlayerSerializer() throws IOException, SQLException {
-		Properties properties = new Properties();
-		try (InputStream is = new FileInputStream("data/game/serializer.conf")) {
-			properties.load(is);
-		}
+    private PlayerSerializer createPlayerSerializer() throws IOException, SQLException {
+        Properties properties = new Properties();
+        try (InputStream is = new FileInputStream("data/game/serializer.conf")) {
+            properties.load(is);
+        }
 
-		String type = (String) properties.get("type");
-		switch (type) {
-		case "dummy":
-			return new DummyPlayerSerializer();
+        String type = (String) properties.get("type");
+        switch (type) {
+            case "dummy":
+                return new DummyPlayerSerializer();
 
-		case "jdbc":
-			String url = (String) properties.get("url");
-			String username = (String) properties.get("username");
-			String password = (String) properties.get("password");
-			return new JdbcPlayerSerializer(url, username, password);
+            case "jdbc":
+                String url = (String) properties.get("url");
+                String username = (String) properties.get("username");
+                String password = (String) properties.get("password");
+                return new JdbcPlayerSerializer(url, username, password);
 
-		default:
-			throw new IOException("unknown serializer type");
-		}
-	}
+            default:
+                throw new IOException("unknown serializer type");
+        }
+    }
 
-	public void httpBind(SocketAddress address) throws InterruptedException {
-		logger.info("Binding to HTTP address: " + address + "...");
-		httpBootstrap.localAddress(address).bind().sync();
-	}
+    public void httpBind(SocketAddress address) throws InterruptedException {
+        logger.info("Binding to HTTP address: " + address + "...");
+        httpBootstrap.localAddress(address).bind().sync();
+    }
 
-	public void serviceBind(SocketAddress address) throws InterruptedException {
-		logger.info("Binding to service address: " + address + "...");
-		serviceBootstrap.localAddress(address).bind().sync();
-	}
+    public void serviceBind(SocketAddress address) throws InterruptedException {
+        logger.info("Binding to service address: " + address + "...");
+        serviceBootstrap.localAddress(address).bind().sync();
+    }
 
-	public void start() {
-		logger.info("Ready for connections.");
+    public void start() {
+        logger.info("Ready for connections.");
 
-		/* start login and update services */
-		executor.submit(loginService);
-		executor.submit(updateService);
+        /* start login and update services */
+        executor.submit(loginService);
+        executor.submit(updateService);
 
-		/* main game tick loop */
-		for (;;) {
-			long start = System.currentTimeMillis();
-			tick();
-			long elapsed = (System.currentTimeMillis() - start);
-			long waitFor = 600 - elapsed;
-			if (waitFor >= 0) {
-				try {
-					Thread.sleep(waitFor);
-				} catch (InterruptedException e) {
-					/* ignore */
-				}
-			}
-		}
-	}
+        /* main game tick loop */
+        for (;;) {
+            long start = System.currentTimeMillis();
+            tick();
+            long elapsed = (System.currentTimeMillis() - start);
+            long waitFor = 600 - elapsed;
+            if (waitFor >= 0) {
+                try {
+                    Thread.sleep(waitFor);
+                } catch (InterruptedException e) {
+                    /* ignore */
+                }
+            }
+        }
+    }
 
-	private void tick() {
-		/*
-		 * As the MobList class is not thread-safe, players must be registered
-		 * within the game logic processing code.
-		 */
-		loginService.registerNewPlayers(world);
+    private void tick() {
+        /*
+         * As the MobList class is not thread-safe, players must be registered
+         * within the game logic processing code.
+         */
+        loginService.registerNewPlayers(world);
 
-		world.tick();
-	}
+        world.tick();
+    }
 
-	public World getWorld() {
-		return world;
-	}
+    public World getWorld() {
+        return world;
+    }
 
-	public LoginService getLoginService() {
-		return loginService;
-	}
+    public LoginService getLoginService() {
+        return loginService;
+    }
 
-	public UpdateService getUpdateService() {
-		return updateService;
-	}
+    public UpdateService getUpdateService() {
+        return updateService;
+    }
 
-	public int getVersion() {
-		return version;
-	}
+    public int getVersion() {
+        return version;
+    }
 
-	public Cache getCache() {
-		return cache;
-	}
+    public Cache getCache() {
+        return cache;
+    }
 
-	public ChecksumTable getChecksumTable() {
-		return checksumTable;
-	}
+    public ChecksumTable getChecksumTable() {
+        return checksumTable;
+    }
 
-	public CodecRepository getCodecRepository() {
-		return codecRepository;
-	}
+    public CodecRepository getCodecRepository() {
+        return codecRepository;
+    }
 
-	public MessageDispatcher getMessageDispatcher() {
-		return messageDispatcher;
-	}
+    public MessageDispatcher getMessageDispatcher() {
+        return messageDispatcher;
+    }
 
-	public LandscapeKeyTable getLandscapeKeyTable() {
-		return landscapeKeyTable;
-	}
-
+    public LandscapeKeyTable getLandscapeKeyTable() {
+        return landscapeKeyTable;
+    }
 }

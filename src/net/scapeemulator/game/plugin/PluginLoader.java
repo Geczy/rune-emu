@@ -193,8 +193,8 @@ public final class PluginLoader {
     public void reload(String dir) throws IOException, ScriptException {
     	factory = new JsonFactory();
     	scriptEnvironment = new RubyScriptEnvironment();
-    	parsedPluginData = new HashMap<>();
-    	loadedPlugins = new HashSet<>();
+    	parsedPluginData.clear();
+    	loadedPlugins.clear();
     	load(new File(dir));
     }
 }

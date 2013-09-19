@@ -84,7 +84,7 @@ public final class ScriptContext {
      * Adds a button dispatcher handler to the list of handlers.
      * @param handler The button handler to add.
      */
-    public void addButtonHandler(net.scapeemulator.game.button.ButtonHandler handler) {
+    public void addButtonHandler(ButtonHandler handler) {
         buttonHandlers.add(handler);
     }
 
@@ -93,7 +93,7 @@ public final class ScriptContext {
      * @param dispatcher The dispatcher to decorate.
      */
     public void decorateButtonDispatcher(ButtonDispatcher dispatcher) {
-        for(net.scapeemulator.game.button.ButtonHandler handler : buttonHandlers) {
+        for(ButtonHandler handler : buttonHandlers) {
             dispatcher.bind(handler);
         }
     }
