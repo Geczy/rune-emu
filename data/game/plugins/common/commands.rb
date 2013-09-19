@@ -1,6 +1,5 @@
 require 'java'
 
-java_import 'net.scapeemulator.game.GameServer'
 # Common administrator commands
 
 RuneEmulator::Bootstrap.bind_cmd('window') { |player, args|

@@ -201,4 +201,8 @@ public final class NPCDefinition {
         }
         return def;
     }
+    
+    public String getName() {
+        return name;
+    }
 }

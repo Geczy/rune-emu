@@ -1,5 +1,6 @@
 package net.scapeemulator.game.dialogue;
 
+import net.scapeemulator.game.model.definition.NPCDefinitions;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.inter.InterfaceAnimationMessage;
 import net.scapeemulator.game.msg.impl.inter.InterfaceNPCHeadMessage;
@@ -28,6 +29,7 @@ public final class DialogueContext {
     private DialogueType dialogueType;
     private String[] options;
     private boolean inputDisplayed;
+    private boolean overflowDisplayed;
     
     private enum DialogueType {
         
@@ -77,13 +79,12 @@ public final class DialogueContext {
             case SEVEN_OPTION:
             case EIGHT_OPTION:
             case NINE_OPTION:
-                boolean isOverflow = (id - OPTION_OFFSET) % 2 != 0;
                 int offset = componentId - 1;
                 int count = getAmountOptions(dialogueType);
                 if(count > 5) {
                     
                     /* Swap from overflow to option chatbox */
-                    if(offset == LESS_OPTIONS && isOverflow) {
+                    if(offset == LESS_OPTIONS && overflowDisplayed) {
                         int optionInterfaceId = getOptionInterfaceId(count);          
                         player.setInterfaceText(optionInterfaceId, 6, "More Options...");
 
@@ -92,11 +93,12 @@ public final class DialogueContext {
                         }
                         
                         player.getInterfaceSet().openChatbox(getOptionInterfaceId(count));
+                        overflowDisplayed = false;
                         return;
                     }
                     
                     /* Swap from overflow to option chatbox */
-                    if(offset == MORE_OPTIONS && !isOverflow) {
+                    if(offset == MORE_OPTIONS && !overflowDisplayed) {
                         int overflowInterfaceId = getOverflowInterfaceId(count);
             
                         player.setInterfaceText(overflowInterfaceId, 2, "Less Options...");
@@ -105,11 +107,12 @@ public final class DialogueContext {
                             player.setInterfaceText(overflowInterfaceId, i - 1, options[i]);
                         }
                         player.getInterfaceSet().openChatbox(getOverflowInterfaceId(count));
+                        overflowDisplayed = true;
                         return;
                     }
                 }
                 
-                if(isOverflow) {
+                if(overflowDisplayed) {
                     offset += 4;
                 }
                 
@@ -144,7 +147,7 @@ public final class DialogueContext {
         for(int i = 0; i < chunks.length ; i++) {
             player.setInterfaceText(id, i + 4, chunks[i]);
         }
-        //player.setInterfaceText(id, 3, StringUtils.capitalise(player.getUsername()));
+        player.setInterfaceText(id, 3, StringUtils.capitalise(NPCDefinitions.forId(npcId).getName()));
         player.send(new InterfaceAnimationMessage(id, 2, animation.getAnimationId()));
         player.send(new InterfaceNPCHeadMessage(id, 2, npcId));
         player.getInterfaceSet().openChatbox(id);
@@ -187,6 +190,7 @@ public final class DialogueContext {
         player.getInterfaceSet().openChatbox(optionInterfaceId);
         dialogueType = getOptionDialogue(amountOptions);
         inputDisplayed = true;
+        overflowDisplayed = false;
         options = opts;
     }
     
@@ -199,7 +203,7 @@ public final class DialogueContext {
     }
     
     private static int getOverflowInterfaceId(int count) {
-        return getOptionInterfaceId(count - 4) + 1;
+        return getOptionInterfaceId(count - 4);
     }
     
     private static int getAmountOptions(DialogueType type) {
