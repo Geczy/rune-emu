@@ -41,6 +41,10 @@ public final class ItemOnItemDispatcher {
     public void bind(ItemOnItemHandler handler) {
         handlers.put(calculateHash(handler.getItemOne(), handler.getItemTwo()), handler);
     }
+    
+    public void unbindAll() {
+        handlers.clear();
+    }
 
     public void handle(Player player, int idOne, int idTwo, int hashOne, int hashTwo, int slotOne, int slotTwo) {
         Inventory inventoryOne = player.getInventorySet().get(hashOne);

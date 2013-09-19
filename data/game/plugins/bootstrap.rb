@@ -9,9 +9,11 @@ java_import 'net.scapeemulator.game.item.ItemOnObjectHandler'
 java_import 'net.scapeemulator.game.object.ObjectHandler'
 java_import 'net.scapeemulator.game.player.PlayerHandler'
 java_import 'net.scapeemulator.game.model.World'
-java_import 'net.scapeemulator.game.dialogue.DialogueSet'
 java_import 'net.scapeemulator.game.dialogue.Dialogue'
 java_import 'net.scapeemulator.game.dialogue.Stage'
+
+# To eliminate the annoying warning messages about reinitializing constants
+$VERBOSE = nil
 
 module RuneEmulator
 
@@ -164,7 +166,6 @@ module RuneEmulator
 			def build_dialogue(name, &block)
 				builder = DialogueBuilder.new
 				block.call builder
-				DialogueSet::add(name, builder.dialogue)
 			end
 		end
 

@@ -20,6 +20,10 @@ public final class CommandDispatcher {
     public void bind(CommandHandler handler) {
         handlers.put(handler.getName(), handler);
     }
+    
+    public void unbindAll() {
+        handlers.clear();
+    }
 
     public void handle(Player player, String command) {
         String[] parts = command.split(" ");

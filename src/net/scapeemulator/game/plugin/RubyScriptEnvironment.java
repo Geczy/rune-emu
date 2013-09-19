@@ -108,5 +108,12 @@ public final class RubyScriptEnvironment {
             compiledScript.eval();
         }
     }
+    
+    /**
+     * Purges the environment.
+     */
+    public void purge() {
+        scripts.clear();
+    }
 }
 

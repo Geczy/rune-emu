@@ -46,6 +46,10 @@ public final class ItemOnObjectDispatcher {
         int hash = getHash(handler.getItemId(), handler.getObjectId());
         handlers.put(hash, handler);
     }
+    
+    public void unbindAll() {
+        handlers.clear();
+    }
 
     public void handle(Player player, int objectId, Position position, int hash, int itemId, int slot) {
 

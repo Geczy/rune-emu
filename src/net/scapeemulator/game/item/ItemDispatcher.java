@@ -70,6 +70,10 @@ public final class ItemDispatcher {
         }
     }
     
+    public void unbindAll() {
+        handlerLists.clear();
+    }
+    
     private static boolean validateInventory(Inventory inventory, int id, int slot) {
         return inventory.get(slot) != null && inventory.get(slot).getId() == id;
     }

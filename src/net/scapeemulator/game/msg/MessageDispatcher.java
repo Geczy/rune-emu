@@ -83,6 +83,16 @@ public final class MessageDispatcher {
         context.decorateObjectDispatcher(objectDispatcher);
         context.decoratePlayerDispatcher(playerDispatcher);
     }
+    
+    public void purge() {
+        buttonDispatcher.unbindAll();
+        commandDispatcher.unbindAll();
+        itemOnItemDispatcher.unbindAll();
+        itemOnObjectDispatcher.unbindAll();
+        itemDispatcher.unbindAll();
+        objectDispatcher.unbindAll();
+        playerDispatcher.unbindAll();
+    }
 
     public <T extends Message> void bind(Class<T> clazz, MessageHandler<T> handler) {
         handlers.put(clazz, handler);

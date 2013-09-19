@@ -22,6 +22,10 @@ public final class PlayerDispatcher {
         handlers.put(handler.getOption(), handler);
     }
     
+    public void unbindAll() {
+        handlers.clear();
+    }
+    
     public void handle(Player player, int selectedId, ExtendedOption option) {
         Player selectedPlayer = World.getWorld().getPlayers().get(selectedId);
         

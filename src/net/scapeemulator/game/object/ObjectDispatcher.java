@@ -64,12 +64,17 @@ public final class ObjectDispatcher {
             list.add(handler);
         }
     }
+    
+    public void unbindAll() {
+        for(List<ObjectHandler> list : handlerLists.values()) {
+            list.clear();
+        }
+    }
 
     private static String getOptionName(int id, Option option) {
         String optionName = ObjectDefinitions.forId(id).getOptions()[option.toInteger()];
         return optionName == null ? "null" : optionName.toLowerCase();
     }
-
 
     public void handle(Player player, int id, Position position, Option option) {
         List<ObjectHandler> handlers = handlerLists.get(option);

@@ -59,6 +59,10 @@ public final class ButtonDispatcher {
         /* Add the handler to the list */
         list.add(handler);
     }
+    
+    public void unbindAll() {
+        handlerLists.clear();
+    }
 
     public void handle(Player player, int hash, int param, ExtendedOption option) {
 

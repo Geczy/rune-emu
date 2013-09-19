@@ -190,11 +190,12 @@ public final class PluginLoader {
         loadedPlugins.add(name);
     }
     
-    public void reload(String dir) throws IOException, ScriptException {
-    	factory = new JsonFactory();
-    	scriptEnvironment = new RubyScriptEnvironment();
-    	parsedPluginData.clear();
-    	loadedPlugins.clear();
-    	load(new File(dir));
+    /**
+     * Purges all the internal data.
+     */
+    public void purge() {
+        scriptEnvironment.purge();
+        parsedPluginData.clear();
+        loadedPlugins.clear();
     }
 }

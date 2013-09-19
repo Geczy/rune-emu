@@ -9,7 +9,6 @@ import io.netty.util.internal.logging.Slf4JLoggerFactory;
 import net.scapeemulator.cache.Cache;
 import net.scapeemulator.cache.ChecksumTable;
 import net.scapeemulator.cache.FileStore;
-import net.scapeemulator.cache.def.VarbitDefinition;
 import net.scapeemulator.game.cache.MapLoader;
 import net.scapeemulator.game.io.DummyPlayerSerializer;
 import net.scapeemulator.game.io.JdbcPlayerSerializer;
@@ -21,6 +20,7 @@ import net.scapeemulator.game.model.definition.WidgetDefinitions;
 import net.scapeemulator.game.model.object.GroundObjectPopulator;
 import net.scapeemulator.game.model.pathfinding.MapDataListener;
 import net.scapeemulator.game.model.player.EquipmentDefinition;
+import net.scapeemulator.game.model.definition.NPCDefinitions;
 import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.msg.CodecRepository;
 import net.scapeemulator.game.msg.MessageDispatcher;
@@ -45,102 +45,60 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import net.scapeemulator.game.model.definition.NPCDefinitions;
+
 
 public final class GameServer {
 
     private static final Logger logger = LoggerFactory.getLogger(GameServer.class);
+    private static GameServer server;
 
     public static void main(String[] args) {
         try {
             InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
 
-            GameServer server = new GameServer(new InetSocketAddress(NetworkConstants.LOGIN_PORT));
+            GameServer instance = getInstance();
+            instance.load();
 
             try {
-                server.httpBind(new InetSocketAddress(NetworkConstants.HTTP_PORT));
+                instance.httpBind(new InetSocketAddress(NetworkConstants.HTTP_PORT));
             } catch (Throwable t) {
                 /* TODO: fix Netty's diagnostic message in this case */
                 logger.warn("Failed to bind to HTTP port.", t);
             }
-            server.httpBind(new InetSocketAddress(NetworkConstants.HTTP_ALT_PORT));
+            instance.httpBind(new InetSocketAddress(NetworkConstants.HTTP_ALT_PORT));
 
             try {
-                server.serviceBind(new InetSocketAddress(NetworkConstants.SSL_PORT));
+                instance.serviceBind(new InetSocketAddress(NetworkConstants.SSL_PORT));
             } catch (Throwable t) {
                 /* TODO: fix Netty's diagnostic message in this case */
                 logger.warn("Failed to bind to SSL port.", t);
             }
-            server.serviceBind(new InetSocketAddress(NetworkConstants.GAME_PORT));
+            instance.serviceBind(new InetSocketAddress(NetworkConstants.GAME_PORT));
 
-            server.start();
+            instance.start();
         } catch (Throwable t) {
             logger.error("Failed to start server.", t);
         }
     }
+    
     private final World world = World.getWorld();
     private final ExecutorService executor = Executors.newCachedThreadPool();
     private final EventLoopGroup loopGroup = new NioEventLoopGroup();
     private final ServerBootstrap serviceBootstrap = new ServerBootstrap();
     private final ServerBootstrap httpBootstrap = new ServerBootstrap();
-    private final LoginService loginService;
     private final UpdateService updateService = new UpdateService();
-    private final Cache cache;
-    private final ChecksumTable checksumTable;
-    private final LandscapeKeyTable landscapeKeyTable;
-    private final CodecRepository codecRepository;
-    private final MessageDispatcher messageDispatcher;
-    private final PluginLoader pluginLoader;
+    private final PluginLoader pluginLoader = new PluginLoader();
+    private final ScriptContext scriptContext = new ScriptContext();
+    private final MessageDispatcher messageDispatcher = new MessageDispatcher();
+    private LoginService loginService;
+    private Cache cache;
+    private ChecksumTable checksumTable;
+    private LandscapeKeyTable landscapeKeyTable;
+    private CodecRepository codecRepository;
+
     private final int version = 530;
 
-    public GameServer(SocketAddress loginAddress) throws IOException, ScriptException, SQLException {
-        logger.info("Starting ScapeEmulator game server...");
-
-        /* load landscape keys */
-        landscapeKeyTable = LandscapeKeyTable.open("data/game/landscape-keys");
-
-        /* load game cache */
-        cache = new Cache(FileStore.open("data/game/cache"));
-        checksumTable = cache.createChecksumTable();
-        ItemDefinitions.init(cache);
-        ObjectDefinitions.init(cache);
-        WidgetDefinitions.init(cache);
-        VarbitDefinitions.init(cache);
-        NPCDefinitions.init(cache);
-        EquipmentDefinition.init();
-
-        /* load all the maps into memory */
-        MapLoader loader = new MapLoader();
-        loader.addListener(new GroundObjectPopulator(world.getGroundObjects()));
-        loader.addListener(new MapDataListener(world.getTraversalMap()));
-        loader.load(cache, landscapeKeyTable);
-
-        /* load message codecs and dispatcher */
-        codecRepository = new CodecRepository(landscapeKeyTable);
-        messageDispatcher = new MessageDispatcher();
-
-        /* load the server pluginLoader */
-        ScriptContext scriptContext = new ScriptContext();
-        pluginLoader = new PluginLoader();
-        pluginLoader.setContext(scriptContext);
-        pluginLoader.load("./data/game/plugins/");
-
-        /* decorate each of the dispatchers */
-        messageDispatcher.decorateDispatchers(scriptContext);
-
-        /* load player serializer from config file */
-        PlayerSerializer serializer = createPlayerSerializer();
-        logger.info("Using serializer: " + serializer + ".");
-        loginService = new LoginService(serializer);
-
-        /* start netty */
-        httpBootstrap.group(loopGroup);
-        httpBootstrap.channel(NioServerSocketChannel.class);
-        httpBootstrap.childHandler(new HttpChannelInitializer());
-        serviceBootstrap.group(loopGroup);
-        serviceBootstrap.channel(NioServerSocketChannel.class);
-        serviceBootstrap.childHandler(new RsChannelInitializer(this));
-    }
+    private GameServer() {}
 
     private PlayerSerializer createPlayerSerializer() throws IOException, SQLException {
         Properties properties = new Properties();
@@ -172,6 +130,52 @@ public final class GameServer {
     public void serviceBind(SocketAddress address) throws InterruptedException {
         logger.info("Binding to service address: " + address + "...");
         serviceBootstrap.localAddress(address).bind().sync();
+    }
+    
+    public void load() throws IOException, ScriptException, SQLException {
+        logger.info("Starting ScapeEmulator game server...");
+
+        /* load landscape keys */
+        landscapeKeyTable = LandscapeKeyTable.open("data/game/landscape-keys");
+
+        /* load game cache */
+        cache = new Cache(FileStore.open("data/game/cache"));
+        checksumTable = cache.createChecksumTable();
+        ItemDefinitions.init(cache);
+        ObjectDefinitions.init(cache);
+        WidgetDefinitions.init(cache);
+        VarbitDefinitions.init(cache);
+        NPCDefinitions.init(cache);
+        EquipmentDefinition.init();
+
+        /* load all the maps into memory */
+        MapLoader loader = new MapLoader();
+        loader.addListener(new GroundObjectPopulator(world.getGroundObjects()));
+        loader.addListener(new MapDataListener(world.getTraversalMap()));
+        loader.load(cache, landscapeKeyTable);
+
+        /* load message codecs and dispatcher */
+        codecRepository = new CodecRepository(landscapeKeyTable);
+
+        /* load the server pluginLoader */
+        pluginLoader.setContext(scriptContext);
+        pluginLoader.load("./data/game/plugins/");
+
+        /* decorate each of the dispatchers */
+        messageDispatcher.decorateDispatchers(scriptContext);
+
+        /* load player serializer from config file */
+        PlayerSerializer serializer = createPlayerSerializer();
+        logger.info("Using serializer: " + serializer + ".");
+        loginService = new LoginService(serializer);
+
+        /* start netty */
+        httpBootstrap.group(loopGroup);
+        httpBootstrap.channel(NioServerSocketChannel.class);
+        httpBootstrap.childHandler(new HttpChannelInitializer());
+        serviceBootstrap.group(loopGroup);
+        serviceBootstrap.channel(NioServerSocketChannel.class);
+        serviceBootstrap.childHandler(new RsChannelInitializer(this));
     }
 
     public void start() {
@@ -205,6 +209,21 @@ public final class GameServer {
         loginService.registerNewPlayers(world);
 
         world.tick();
+    }
+    
+    public void reloadPlugins() throws IOException, ScriptException {
+        
+        /* Purge the dispatcher and script context */
+        messageDispatcher.purge();
+        scriptContext.purge();
+        pluginLoader.purge();
+        
+        /* Reload all the plugins */
+        pluginLoader.setContext(scriptContext);
+        pluginLoader.load("./data/game/plugins/");
+        
+        /* Decorate the dispatchers */
+        messageDispatcher.decorateDispatchers(scriptContext);
     }
 
     public World getWorld() {
@@ -241,5 +260,12 @@ public final class GameServer {
 
     public LandscapeKeyTable getLandscapeKeyTable() {
         return landscapeKeyTable;
+    }
+    
+    public static GameServer getInstance() {
+        if(server == null) {
+            server = new GameServer();
+        }
+        return server;
     }
 }
