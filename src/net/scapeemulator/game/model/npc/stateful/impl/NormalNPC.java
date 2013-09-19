@@ -66,7 +66,7 @@ public final class NormalNPC extends StatefulNPC<State> {
     public State determineState() {
         /* 10% chance to randomly walk around, ~every 3 seconds */
         int i = random.nextInt(10);
-        if(i < 1 && getWalkingQueue().isEmpty()) {
+        if(i < 1 && getWalkingQueue().isEmpty() && !isTurnToTargetSet()) {
             return WALK_RANDOMLY;
         }
         return NONE;

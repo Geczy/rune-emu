@@ -32,6 +32,9 @@ public abstract class NpcDescriptor {
 
 		if (npc.isSpotAnimationUpdated())
 			addBlock(new SpotAnimationNpcBlock(npc));
+                
+                if(npc.isTurnToTargetUpdated())
+                    addBlock(new TurnToMobNpcBlock(npc));
 	}
 
 	private void addBlock(NpcBlock block) {
@@ -58,6 +61,7 @@ public abstract class NpcDescriptor {
 			}
 
 			encodeBlock(message, blockBuilder, AnimationNpcBlock.class);
+                        encodeBlock(message, blockBuilder, TurnToMobNpcBlock.class);
 			encodeBlock(message, blockBuilder, SpotAnimationNpcBlock.class);
 		}
 	}

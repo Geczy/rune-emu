@@ -1,7 +1,7 @@
 package net.scapeemulator.game.update;
 
-import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.msg.impl.PlayerUpdateMessage;
+import net.scapeemulator.game.model.npc.NPC;
+import net.scapeemulator.game.msg.impl.NpcUpdateMessage;
 import net.scapeemulator.game.net.game.DataTransformation;
 import net.scapeemulator.game.net.game.DataType;
 import net.scapeemulator.game.net.game.GameFrameBuilder;
@@ -9,17 +9,17 @@ import net.scapeemulator.game.net.game.GameFrameBuilder;
 /**
  * Written by Hadyn Richard
  */
-public final class TurnToMobPlayerBlock extends PlayerBlock {
+public class TurnToMobNpcBlock extends NpcBlock {
     
     private final int turnToTarget;
     
-    public TurnToMobPlayerBlock(Player player) {
-        super(0x2);
-        turnToTarget = player.getTurnToTargetId();
+    public TurnToMobNpcBlock(NPC npc) {
+        super(0x4);
+        turnToTarget = npc.getTurnToTargetId();
     }
 
     @Override
-    public void encode(PlayerUpdateMessage message, GameFrameBuilder builder) {
+    public void encode(NpcUpdateMessage message, GameFrameBuilder builder) {
         builder.put(DataType.SHORT, DataTransformation.ADD, turnToTarget);
     }
 }

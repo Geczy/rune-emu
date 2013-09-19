@@ -2,6 +2,7 @@ package net.scapeemulator.game.dialogue;
 
 import net.scapeemulator.game.model.definition.NPCDefinitions;
 import net.scapeemulator.game.model.mob.Mob;
+import net.scapeemulator.game.model.npc.NPC;
 import net.scapeemulator.game.model.player.InterfaceSet.Component;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.inter.InterfaceAnimationMessage;
@@ -35,6 +36,8 @@ public final class DialogueContext {
     private boolean inputDisplayed;
     private boolean overflowDisplayed;
     
+    private boolean isStopped;
+    
     private enum DialogueType {
         
         /* The enumeration for each conversation dialogue */
@@ -53,6 +56,10 @@ public final class DialogueContext {
     public DialogueContext(Player player, Dialogue dialogue) {
         this.player = player;
         this.dialogue = dialogue;
+        init();
+    }
+    
+    private void init() {
         setStage(Dialogue.START_STAGE);
     }
     
@@ -142,7 +149,7 @@ public final class DialogueContext {
         inputDisplayed = displayInput;
     }
     
-    public void openNpcConversationDialogue(String text, int npcId, HeadAnimation animation, boolean displayInput) {
+    public void openNpcConversationDialogue(String text, int type, HeadAnimation animation, boolean displayInput) {
         String[] chunks = split(text);
         if(chunks.length >= 5) {
             throw new IllegalArgumentException();
@@ -152,16 +159,18 @@ public final class DialogueContext {
             player.setInterfaceText(id, i + 4, chunks[i]);
         }
         
-        if(npcId == CURRENT_TARGET) {
-            npcId = player.getTurnToTarget();
-            if(npcId == -1 || (npcId & 0x8000) != 0) {
+        /* TODO: Possibly clean up */
+        if(type == CURRENT_TARGET) {
+            if(!player.isTurnToTargetSet()) {
                 throw new IllegalStateException();
             }
+            NPC npc = (NPC) player.getTurnToTarget();
+            type = npc.getType();
         }
         
-        player.setInterfaceText(id, 3, StringUtils.capitalise(NPCDefinitions.forId(npcId).getName()));
+        player.setInterfaceText(id, 3, StringUtils.capitalise(NPCDefinitions.forId(type).getName()));
         player.send(new InterfaceAnimationMessage(id, 2, animation.getAnimationId()));
-        player.send(new InterfaceNPCHeadMessage(id, 2, npcId));
+        player.send(new InterfaceNPCHeadMessage(id, 2, type));
         player.getInterfaceSet().openChatbox(id);
         dialogueType = DialogueType.PLAYER_CONVERSATION;
         inputDisplayed = displayInput;
@@ -265,7 +274,12 @@ public final class DialogueContext {
     public void stop() {
         Component component = player.getInterfaceSet().getChatbox();
         component.removeListener();
-        component.reset();
+        component.reset();      
+        isStopped = true;
+    }
+    
+    public boolean isStopped() {
+        return isStopped;
     }
     
     private static String[] split(String str) {

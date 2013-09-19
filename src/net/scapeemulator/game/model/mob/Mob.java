@@ -20,7 +20,8 @@ public abstract class Mob extends Entity {
     protected Animation animation;
     protected SpotAnimation spotAnimation;
     protected Position turnToPosition;
-    protected int turnToTarget = -1;
+    protected Mob turnToTarget;
+    protected int turnToTargetId = -1;
     protected Action<?> action;
 
     public Mob() {
@@ -150,23 +151,33 @@ public abstract class Mob extends Entity {
     }
     
     public void turnToTarget(Mob turnToTarget) {
-        int indexOff = 0;
+        int val = turnToTarget.getId();
         if(turnToTarget instanceof Player) {
-            indexOff += 0x8000;
+            val += 0x8000;
         }
-        this.turnToTarget = turnToTarget.getId() + indexOff;
+        turnToTargetId = val;
+        this.turnToTarget = turnToTarget;
+    }
+    
+    public Mob getTurnToTarget() {
+        return turnToTarget;
     }
     
     public void resetTurnToTarget() {
-        turnToTarget = 65535;
+        turnToTargetId = 65535;
+        turnToTarget = null;
+    }
+    
+    public boolean isTurnToTargetSet() {
+        return turnToTarget != null;
     }
     
     public boolean isTurnToTargetUpdated() {
-        return turnToTarget != -1;
+        return turnToTargetId != -1;
     }
     
-    public int getTurnToTarget() {
-        return turnToTarget;
+    public int getTurnToTargetId() {
+        return turnToTargetId;
     }
 
     public void walkPath(Path path) {
@@ -177,13 +188,36 @@ public abstract class Mob extends Entity {
             }
         }
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        if(object == null) {
+            return false;
+        }
+        
+        if(!(object instanceof Mob)) {
+            return false;
+        }
+       
+        Mob otherMob = (Mob) object;
+        return getId(otherMob) == getId(this);
+    }
 
     public void reset() {
         animation = null;
         spotAnimation = null;
         turnToPosition = null;
         teleporting = false;
+        turnToTargetId = -1;
         walkingQueue.setMinimapFlagReset(false);
+    }
+    
+    private static int getId(Mob mob) {
+        int val = mob.getId();
+        if(mob instanceof Player) {
+            val += 0x8000;
+        }
+        return val;
     }
 
     public abstract boolean isRunning();

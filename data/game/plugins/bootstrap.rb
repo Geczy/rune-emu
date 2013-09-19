@@ -171,7 +171,7 @@ module RuneEmulator
 			end
 
 			def handle(player, npc, option, context)
-				@proc.call npc, option, context
+				@proc.call player, npc, option, context
 			end
 		end
 	end
@@ -187,9 +187,8 @@ module RuneEmulator
 				DIALOGUES[name] = builder.dialogue
 			end
 
-			def display_dialogue(player, name)
-				dialogue = DIALOGUES.fetch(name)
-				dialogue.display_to(player)
+			def get_dialogue(name)
+				DIALOGUES.fetch(name)
 			end
 		end
 

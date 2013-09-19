@@ -84,7 +84,7 @@ public final class Position {
         int deltaX = x - other.x;
         int deltaY = y - other.y;
         // TODO will rounding up interfere with other stuff?
-        return (int) Math.ceil(Math.sqrt(deltaX * deltaX + deltaY * deltaY));
+        return (int) Math.floor(Math.sqrt(deltaX * deltaX + deltaY * deltaY));
     }
 
 	public int toPackedInt() {
