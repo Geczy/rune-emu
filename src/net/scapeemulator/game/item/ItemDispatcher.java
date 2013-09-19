@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import net.scapeemulator.game.util.HandlerContext;
 
 /**
  * Created by Hadyn Richard
@@ -71,7 +72,9 @@ public final class ItemDispatcher {
     }
     
     public void unbindAll() {
-        handlerLists.clear();
+        for(List<?> list : handlerLists.values()) {
+            list.clear();
+        }
     }
     
     private static boolean validateInventory(Inventory inventory, int id, int slot) {
@@ -101,11 +104,15 @@ public final class ItemDispatcher {
 
             SlottedItem slottedItem = new SlottedItem(slot, inventory.get(slot));
             String optionName = getOptionName(id, option);
+            
+            HandlerContext context = new HandlerContext();
 
             for(ItemHandler handler : handlers) {
 
                 /* Handle the message parameters */
-                if(!handler.handle(player, inventory, slottedItem, optionName)) {
+                handler.handle(player, inventory, slottedItem, optionName, context);
+                
+                if(context.doStop()) {
                     break;
                 }
             }

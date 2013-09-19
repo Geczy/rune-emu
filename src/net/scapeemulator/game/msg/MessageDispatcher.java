@@ -29,8 +29,11 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 import net.scapeemulator.game.msg.handler.inter.InterfaceInputMessageHandler;
+import net.scapeemulator.game.msg.handler.npc.NPCOptionMessageHandler;
 import net.scapeemulator.game.msg.impl.inter.InterfaceInputMessage;
+import net.scapeemulator.game.msg.impl.npc.NPCOptionMessage;
 import net.scapeemulator.game.msg.impl.player.PlayerOptionMessage;
+import net.scapeemulator.game.npc.NPCDispatcher;
 import net.scapeemulator.game.player.PlayerDispatcher;
 
 public final class MessageDispatcher {
@@ -45,6 +48,7 @@ public final class MessageDispatcher {
     private final ItemDispatcher itemDispatcher = new ItemDispatcher();
     private final ObjectDispatcher objectDispatcher = new ObjectDispatcher();
     private final PlayerDispatcher playerDispatcher = new PlayerDispatcher();
+    private final NPCDispatcher npcDispatcher = new NPCDispatcher();
 
     public MessageDispatcher() {
         bind(PingMessage.class, new PingMessageHandler());
@@ -71,6 +75,7 @@ public final class MessageDispatcher {
         bind(ButtonOptionMessage.class, new ButtonOptionMessageHandler(buttonDispatcher));
         bind(ObjectOptionMessage.class, new ObjectOptionMessageHandler(objectDispatcher));
         bind(PlayerOptionMessage.class, new PlayerOptionMessageHandler(playerDispatcher));
+        bind(NPCOptionMessage.class, new NPCOptionMessageHandler(npcDispatcher));
         bind(InterfaceInputMessage.class, new InterfaceInputMessageHandler());
     }
 
@@ -82,6 +87,7 @@ public final class MessageDispatcher {
         context.decorateItemDispatcher(itemDispatcher);
         context.decorateObjectDispatcher(objectDispatcher);
         context.decoratePlayerDispatcher(playerDispatcher);
+        context.decorateNPCDispatcher(npcDispatcher);
     }
     
     public void purge() {
@@ -92,6 +98,7 @@ public final class MessageDispatcher {
         itemDispatcher.unbindAll();
         objectDispatcher.unbindAll();
         playerDispatcher.unbindAll();
+        npcDispatcher.unbindAll();
     }
 
     public <T extends Message> void bind(Class<T> clazz, MessageHandler<T> handler) {

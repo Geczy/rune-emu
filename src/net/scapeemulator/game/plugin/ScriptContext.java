@@ -32,6 +32,8 @@ import net.scapeemulator.game.object.ObjectHandler;
 
 import java.util.LinkedList;
 import java.util.List;
+import net.scapeemulator.game.npc.NPCDispatcher;
+import net.scapeemulator.game.npc.NPCHandler;
 import net.scapeemulator.game.player.PlayerDispatcher;
 import net.scapeemulator.game.player.PlayerHandler;
 
@@ -74,6 +76,11 @@ public final class ScriptContext {
      * The list of player handlers.
      */
     private List<PlayerHandler> playerHandlers = new LinkedList<>();
+    
+    /**
+     * The list of NPC handlers.
+     */
+    private List<NPCHandler> npcHandlers = new LinkedList<>();
 
     /**
      * Constructs a new {@link ScriptContext};
@@ -207,6 +214,24 @@ public final class ScriptContext {
     }
     
     /**
+     * Adds an NPC handler to the list of handlers.
+     * @param handler The handler to add.
+     */
+    public void addNPCHandler(NPCHandler handler) {
+        npcHandlers.add(handler);
+    }
+    
+    /**
+     * Decorates an player dispatcher with all the player handlers registered to the context.
+     * @param dispatcher The dispatcher to decorate.
+     */
+    public void decorateNPCDispatcher(NPCDispatcher dispatcher) {
+        for(NPCHandler handler : npcHandlers) {
+            dispatcher.bind(handler);
+        }
+    }
+    
+    /**
      * Purges all the handlers from the context.
      */
     public void purge() {
@@ -217,5 +242,6 @@ public final class ScriptContext {
         itemOnObjectHandlers.clear();
         objectHandlers.clear();
         playerHandlers.clear();
+        npcHandlers.clear();
     }
 }

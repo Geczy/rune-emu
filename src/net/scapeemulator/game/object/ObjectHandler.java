@@ -25,6 +25,7 @@ package net.scapeemulator.game.object;
 import net.scapeemulator.game.model.Option;
 import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
 import net.scapeemulator.game.model.player.Player;
+import net.scapeemulator.game.util.HandlerContext;
 
 /**
  * Created by Hadyn Richard
@@ -41,5 +42,5 @@ public abstract class ObjectHandler {
         return option;
     }
     
-    public abstract boolean handle(Player player, GroundObject object, String optionName);
+    public abstract void handle(Player player, GroundObject object, String optionName, HandlerContext context);
 }

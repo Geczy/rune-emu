@@ -4,7 +4,7 @@ java_import 'net.scapeemulator.game.dialogue.HeadAnimation'
 java_import 'net.scapeemulator.game.dialogue.DialogueContext'
 
 # Build the man and women dialogue
-RuneEmulator::Utilities.build_dialogue(:lumbridge_man_women) { |builder|
+RuneEmulator::Utilities.build_dialogue(:lumbridge_man_woman) { |builder|
 
 	# Append the start of the dialogue
 	builder.append_start { |stage|
@@ -20,6 +20,7 @@ RuneEmulator::Utilities.build_dialogue(:lumbridge_man_women) { |builder|
 		}
 	}
 
+	# Append the response of the dialogue	
 	builder.append_stage('response') { |stage|
 
 		# On initialization send the player the response text

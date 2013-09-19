@@ -205,4 +205,8 @@ public final class NPCDefinition {
     public String getName() {
         return name;
     }
+    
+    public String[] getOptions() {
+        return options;
+    }
 }

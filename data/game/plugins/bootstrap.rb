@@ -8,6 +8,7 @@ java_import 'net.scapeemulator.game.item.ItemOnItemHandlerAdapter'
 java_import 'net.scapeemulator.game.item.ItemOnObjectHandler'
 java_import 'net.scapeemulator.game.object.ObjectHandler'
 java_import 'net.scapeemulator.game.player.PlayerHandler'
+java_import 'net.scapeemulator.game.npc.NPCHandler'
 java_import 'net.scapeemulator.game.model.World'
 java_import 'net.scapeemulator.game.dialogue.Dialogue'
 java_import 'net.scapeemulator.game.dialogue.Stage'
@@ -44,11 +45,11 @@ module RuneEmulator
 				$ctx.add_button_handler(ProcButtonHandler.new(option, args[0], args[1], block))
 			end
 
-			def bind_item(option, &block)
+			def bind_item_option(option, &block)
 				$ctx.add_item_handler(ProcItemHandler.new(option, block))
 			end
 
-			def bind_object(option, &block)
+			def bind_object_option(option, &block)
 				$ctx.add_object_handler(ProcObjectHandler.new(option, block))
 			end
 
@@ -65,6 +66,10 @@ module RuneEmulator
 				end
 
 				$ctx.add_item_on_item_handler(handler)
+			end
+
+			def bind_npc_option(option, &block)
+				$ctx.add_npc_handler(ProcNPCHandler.new(option, block))
 			end
 		end
 
@@ -121,8 +126,8 @@ module RuneEmulator
 				@proc = proc
 			end
 
-			def handle(player, inventory, item, option)
-				@proc.call player, inventory, item, option
+			def handle(player, inventory, item, option, context)
+				@proc.call player, inventory, item, option, context
 			end
 		end
 
@@ -143,8 +148,8 @@ module RuneEmulator
 				@proc = proc
 			end
 
-			def handle(player, object, option)
-				@proc.call player, object, option
+			def handle(player, object, option, context)
+				@proc.call player, object, option, context
 			end
 		end
 
@@ -155,7 +160,18 @@ module RuneEmulator
 			end
 
 			def handle(player, selected_player)
-				@proc.call player, option
+				@proc.call selected_player, option
+			end
+		end
+
+		class ProcNPCHandler < NPCHandler
+			def initialize(option, proc) 
+				super(option)
+				@proc = proc
+			end
+
+			def handle(player, npc, option, context)
+				@proc.call npc, option, context
 			end
 		end
 	end

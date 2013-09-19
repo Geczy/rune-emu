@@ -18,6 +18,7 @@ import net.scapeemulator.game.util.LandscapeKeyTable;
 import java.util.HashMap;
 import java.util.Map;
 import net.scapeemulator.game.msg.decoder.inter.InterfaceInputMessageDecoder;
+import net.scapeemulator.game.msg.decoder.npc.NPCOptionOneMessageDecoder;
 import net.scapeemulator.game.msg.decoder.player.PlayerOptionFourMessageDecoder;
 
 public final class CodecRepository {
@@ -69,6 +70,8 @@ public final class CodecRepository {
         bind(new InterfaceInputMessageDecoder());
         
         bind(new PlayerOptionFourMessageDecoder());
+        
+        bind(new NPCOptionOneMessageDecoder());
 
         /* encoders */
         bind(new RegionChangeMessageEncoder(table));

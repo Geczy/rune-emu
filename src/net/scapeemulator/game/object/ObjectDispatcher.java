@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import net.scapeemulator.game.util.HandlerContext;
 
 /**
  * Created by Hadyn Richard
@@ -66,7 +67,7 @@ public final class ObjectDispatcher {
     }
     
     public void unbindAll() {
-        for(List<ObjectHandler> list : handlerLists.values()) {
+        for(List<?> list : handlerLists.values()) {
             list.clear();
         }
     }
@@ -88,11 +89,15 @@ public final class ObjectDispatcher {
             System.out.println("id: " + id + ", rotation: " + object.getRotation() + " , option: " + option + ", type: " + object.getType());
 
             String optionName = getOptionName(id, option);
+            
+            HandlerContext context = new HandlerContext();
 
             for(ObjectHandler handler : handlers) {
 
                 /* Handle the message parameters */
-                if(handler.handle(player, object, optionName)) {
+                handler.handle(player, object, optionName, context);
+                
+                if(context.doStop()) {
                     break;
                 }
             }

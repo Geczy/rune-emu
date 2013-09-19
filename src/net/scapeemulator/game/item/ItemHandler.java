@@ -26,6 +26,7 @@ import net.scapeemulator.game.model.Option;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.SlottedItem;
 import net.scapeemulator.game.model.player.inventory.Inventory;
+import net.scapeemulator.game.util.HandlerContext;
 
 /**
  * Created by Hadyn Richard
@@ -53,5 +54,5 @@ public abstract class ItemHandler {
         return option;
     }
 
-    public abstract boolean handle(Player player, Inventory inventory, SlottedItem item, String option);
+    public abstract void handle(Player player, Inventory inventory, SlottedItem item, String option, HandlerContext context);
 }
