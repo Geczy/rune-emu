@@ -162,10 +162,18 @@ module RuneEmulator
 
 	class Utilities
 
+		DIALOGUES = {}
+
 		class << self
 			def build_dialogue(name, &block)
 				builder = DialogueBuilder.new
 				block.call builder
+				DIALOGUES[name] = builder.dialogue
+			end
+
+			def display_dialogue(player, name)
+				dialogue = DIALOGUES.fetch(name)
+				dialogue.display_to(player)
 			end
 		end
 

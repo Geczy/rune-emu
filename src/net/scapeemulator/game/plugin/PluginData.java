@@ -58,7 +58,7 @@ public final class PluginData {
      * @param dependency The name of the dependency.
      */
     public void addDependency(String dependency) {
-        scripts.add(dependency);
+        dependencies.add(dependency);
     }
 
     /**

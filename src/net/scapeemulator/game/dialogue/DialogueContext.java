@@ -1,6 +1,8 @@
 package net.scapeemulator.game.dialogue;
 
 import net.scapeemulator.game.model.definition.NPCDefinitions;
+import net.scapeemulator.game.model.mob.Mob;
+import net.scapeemulator.game.model.player.InterfaceSet.Component;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.inter.InterfaceAnimationMessage;
 import net.scapeemulator.game.msg.impl.inter.InterfaceNPCHeadMessage;
@@ -11,6 +13,8 @@ import org.codehaus.plexus.util.StringUtils;
  * Written by Hadyn Richard
  */
 public final class DialogueContext {
+    
+    public static final int CURRENT_TARGET = -1;
     
     private static final int TEXT_OFFSET = 210;
     private static final int TEXT_OFFSET_NO_INPUT = 214;
@@ -147,6 +151,14 @@ public final class DialogueContext {
         for(int i = 0; i < chunks.length ; i++) {
             player.setInterfaceText(id, i + 4, chunks[i]);
         }
+        
+        if(npcId == CURRENT_TARGET) {
+            npcId = player.getTurnToTarget();
+            if(npcId == -1 || (npcId & 0x8000) != 0) {
+                throw new IllegalStateException();
+            }
+        }
+        
         player.setInterfaceText(id, 3, StringUtils.capitalise(NPCDefinitions.forId(npcId).getName()));
         player.send(new InterfaceAnimationMessage(id, 2, animation.getAnimationId()));
         player.send(new InterfaceNPCHeadMessage(id, 2, npcId));
@@ -248,6 +260,12 @@ public final class DialogueContext {
                 return DialogueType.NINE_OPTION;
         }
         throw new IllegalArgumentException();
+    }
+    
+    public void stop() {
+        Component component = player.getInterfaceSet().getChatbox();
+        component.removeListener();
+        component.reset();
     }
     
     private static String[] split(String str) {
