@@ -3,12 +3,12 @@ package net.scapeemulator.game.dialogue;
 /**
  * Written by Hadyn Richard
  */
-public enum Option {
+public enum DialogueOption {
     
     OPTION_1, OPTION_2, OPTION_3, OPTION_4, OPTION_5,
     OPTION_6, OPTION_7, OPTION_8, OPTION_9, CONTINUE;
     
-    public static Option forId(int id) {
+    public static DialogueOption forId(int id) {
         switch(id) {
             case 1:
                 return OPTION_1;

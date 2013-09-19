@@ -7,6 +7,6 @@ public abstract class Stage {
     
     public abstract void initializeContext(DialogueContext context);
     
-    public abstract void handleOption(DialogueContext context, Option option);
+    public abstract void handleOption(DialogueContext context, DialogueOption option);
 
 }

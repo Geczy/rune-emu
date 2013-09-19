@@ -72,7 +72,7 @@ public final class DialogueContext {
             case PLAYER_CONVERSATION:
             case NPC_CONVERSATION:
             case TEXT:
-                currentStage.handleOption(this, Option.CONTINUE);
+                currentStage.handleOption(this, DialogueOption.CONTINUE);
                 break;
                 
             case TWO_OPTION:
@@ -120,7 +120,7 @@ public final class DialogueContext {
                     offset += 4;
                 }
                 
-                currentStage.handleOption(this, Option.forId(offset));
+                currentStage.handleOption(this, DialogueOption.forId(offset));
                 break;
         }
     }

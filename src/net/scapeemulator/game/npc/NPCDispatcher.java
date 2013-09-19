@@ -63,7 +63,7 @@ public class NPCDispatcher  {
      */
     private static String getOptionName(int id, Option option) {
         String optionName = NPCDefinitions.forId(id).getOptions()[option.toInteger()];
-        return optionName == null ? "null" : optionName;
+        return optionName == null ? "null" : optionName.toLowerCase();
     }
 
     public void handle(Player player, int id, Option option) {
