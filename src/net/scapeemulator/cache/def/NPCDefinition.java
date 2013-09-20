@@ -10,6 +10,7 @@ public final class NPCDefinition {
 
     private String name;
     private String[] options;
+    private int size;
 
     public static NPCDefinition decode(ByteBuffer buffer) {
         NPCDefinition def = new NPCDefinition();
@@ -32,7 +33,7 @@ public final class NPCDefinition {
             }
 
             if (opcode == 12) {
-                int var0 = buffer.get() & 0xff;
+                def.size = buffer.get() & 0xff;
             }
 
             if (opcode >= 30 && opcode <= 35) {
@@ -204,6 +205,10 @@ public final class NPCDefinition {
     
     public String getName() {
         return name;
+    }
+    
+    public int getSize() {
+        return size;
     }
     
     public String[] getOptions() {
