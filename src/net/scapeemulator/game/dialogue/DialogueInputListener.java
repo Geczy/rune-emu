@@ -19,4 +19,9 @@ public final class DialogueInputListener extends ComponentListenerAdapter {
     public void inputPressed(Component component, int componentId, int dynamicId) {
         context.handleInput(component.getCurrentId(), componentId);
     }
+
+    @Override
+    public void componentClosed(Component component) {
+        context.stop();
+    }
 }

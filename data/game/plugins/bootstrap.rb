@@ -9,6 +9,7 @@ java_import 'net.scapeemulator.game.item.ItemOnObjectHandler'
 java_import 'net.scapeemulator.game.object.ObjectHandler'
 java_import 'net.scapeemulator.game.player.PlayerHandler'
 java_import 'net.scapeemulator.game.npc.NPCHandler'
+java_import 'net.scapeemulator.game.model.npc.stateful.impl.NormalNPC'
 java_import 'net.scapeemulator.game.model.World'
 java_import 'net.scapeemulator.game.dialogue.Dialogue'
 java_import 'net.scapeemulator.game.dialogue.Stage'
@@ -181,6 +182,16 @@ module RuneEmulator
 		DIALOGUES = {}
 
 		class << self
+			def create_npc(type, params={}, &block)
+				case type
+				when :normal
+					npc = NormalNPC.new(params[:type])
+					yield npc
+					NPC_LIST.add(npc)
+					npc
+				end
+			end
+
 			def build_dialogue(name, &block)
 				builder = DialogueBuilder.new
 				block.call builder

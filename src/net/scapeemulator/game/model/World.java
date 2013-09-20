@@ -35,11 +35,6 @@ public final class World {
         /* TODO: Is this in the correct place? */
         /* Add the object data listener for the traversal map */
 		groundObjects.addListener(new ObjectDataListener(traversalMap));
-
-        NormalNPC normalNPC = new NormalNPC(1);
-        normalNPC.setPosition(new Position(3222, 3222));
-        normalNPC.setBounds(new QuadArea(3200, 3200, 3300, 3300));
-        npcs.add(normalNPC);
 	}
 
 	public MobList<Player> getPlayers() {

@@ -272,10 +272,12 @@ public final class DialogueContext {
     }
     
     public void stop() {
-        Component component = player.getInterfaceSet().getChatbox();
-        component.removeListener();
-        component.reset();      
-        isStopped = true;
+        if(!isStopped) {
+            Component component = player.getInterfaceSet().getChatbox();
+            component.removeListener();
+            component.reset();      
+            isStopped = true;
+        }
     }
     
     public boolean isStopped() {
