@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class NPCDefinitions {
 
-    private static final Logger logger = LoggerFactory.getLogger(ItemDefinitions.class);
+    private static final Logger logger = LoggerFactory.getLogger(NPCDefinitions.class);
     private static NPCDefinition[] definitions;
 
     public static void init(Cache cache) throws IOException {

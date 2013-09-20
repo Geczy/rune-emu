@@ -41,11 +41,15 @@ public final class World {
         normalNPC.setBounds(new QuadArea(3200, 3200, 3300, 3300));
         npcs.add(normalNPC);
 	}
-
+	
 	public MobList<Player> getPlayers() {
 		return players;
 	}
 
+	public void addNpc(NPC npc) {
+		npcs.add(npc);
+	}
+	
 	public MobList<NPC> getNpcs() {
 		return npcs;
 	}
