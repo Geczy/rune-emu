@@ -31,7 +31,7 @@ public final class Dialogue {
     public DialogueContext displayTo(Player player) {
         DialogueContext context = new DialogueContext(player, this);
         Component chatbox = player.getInterfaceSet().getChatbox();
-        chatbox.setListener(new DialogueInputListener(context));
+        chatbox.setListener(new DialogueContextListener(context));
         return context;
     }
     
