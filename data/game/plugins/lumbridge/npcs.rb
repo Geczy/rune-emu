@@ -11,6 +11,7 @@ RuneEmulator::Bootstrap.bind_npc_option(Option::ONE) { |player, npc, option, con
 	if option.eql?('talk-to')
 		if MEN_AND_WOMEN_TYPES.include?(npc.type)
 			player.start_action StartDialogueAction.new(player, npc, RuneEmulator::Utilities.get_dialogue(:lumbridge_man_woman))
+			context.stop
 		end
 	end
 }
