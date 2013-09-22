@@ -9,8 +9,8 @@ import net.scapeemulator.game.model.mob.action.FollowAction;
 public abstract class MobInteractionAction<T extends Mob> extends Action<T> {
     
     private FollowAction followAction;
-    private int distance;
     private boolean reached;
+    protected int distance;
     protected Mob target;
     
     public MobInteractionAction(T mob, Mob target, int distance) {
@@ -27,7 +27,7 @@ public abstract class MobInteractionAction<T extends Mob> extends Action<T> {
     }
 
     @Override
-    public void execute() {
+    public void execute() {        
         if(!reached) {
             followAction.execute();
         }
