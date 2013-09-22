@@ -12,7 +12,8 @@ FLASHING_ICON_VARBIT  = 4729
 MAIN_INFO_VARBIT      = 3288
 CHILD_INFO_VARBIT     = 3289
 
-SKILL_BUTTONS = { Skill::ATTACK => 125, Skill::STRENGTH => 126, Skill::DEFENCE => 127, Skill::RANGED => 128,
+SKILL_BUTTONS = { 
+				  Skill::ATTACK => 125, Skill::STRENGTH => 126, Skill::DEFENCE => 127, Skill::RANGED => 128,
                   Skill::PRAYER => 129, Skill::MAGIC => 130, Skill::RUNECRAFTING => 131, Skill::CONSTRUCTION => 132,
                   Skill::HITPOINTS => 133, Skill::AGILITY => 134, Skill::HERBLORE => 135, Skill::THIEVING => 136,
                   Skill::CRAFTING => 137, Skill::FLETCHING => 138, Skill::SLAYER => 139, Skill::HUNTER => 140,

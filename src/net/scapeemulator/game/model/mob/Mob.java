@@ -20,7 +20,7 @@ public abstract class Mob extends Entity {
     protected Animation animation;
     protected SpotAnimation spotAnimation;
     protected Position turnToPosition;
-    protected Mob turnToTarget;
+    protected Mob currentTarget;
     protected int turnToTargetId = -1;
     protected Action<?> action;
 
@@ -60,7 +60,6 @@ public abstract class Mob extends Entity {
 
             stopAction();
         }
-
         this.action = action;
         World.getWorld().getTaskScheduler().schedule(action);
     }
@@ -137,45 +136,41 @@ public abstract class Mob extends Entity {
     public void playSpotAnimation(SpotAnimation spotAnimation) {
         this.spotAnimation = spotAnimation;
     }
-    
+
     public void turnToPosition(Position turnToPosition) {
         this.turnToPosition = turnToPosition;
     }
-    
+
     public boolean isTurnToPositionUpdated() {
         return turnToPosition != null;
     }
-    
+
     public Position getTurnToPosition() {
         return turnToPosition;
     }
-    
-    public void turnToTarget(Mob turnToTarget) {
-        int val = turnToTarget.getId();
-        if(turnToTarget instanceof Player) {
-            val += 0x8000;
-        }
-        turnToTargetId = val;
-        this.turnToTarget = turnToTarget;
+
+    public void turnToTarget(Mob target) {
+        turnToTargetId = getTargetId(target);
+        currentTarget = target;
     }
-    
+
     public Mob getTurnToTarget() {
-        return turnToTarget;
+        return currentTarget;
     }
-    
+
     public void resetTurnToTarget() {
         turnToTargetId = 65535;
-        turnToTarget = null;
+        currentTarget = null;
     }
-    
+
     public boolean isTurnToTargetSet() {
-        return turnToTarget != null;
+        return currentTarget != null;
     }
-    
+
     public boolean isTurnToTargetUpdated() {
         return turnToTargetId != -1;
     }
-    
+
     public int getTurnToTargetId() {
         return turnToTargetId;
     }
@@ -188,19 +183,19 @@ public abstract class Mob extends Entity {
             }
         }
     }
-    
+
     @Override
     public boolean equals(Object object) {
-        if(object == null) {
+        if (object == null) {
             return false;
         }
-        
-        if(!(object instanceof Mob)) {
+
+        if (!(object instanceof Mob)) {
             return false;
         }
-       
+
         Mob otherMob = (Mob) object;
-        return getId(otherMob) == getId(this);
+        return getTargetId(otherMob) == getTargetId(this);
     }
 
     public void reset() {
@@ -211,10 +206,10 @@ public abstract class Mob extends Entity {
         turnToTargetId = -1;
         walkingQueue.setMinimapFlagReset(false);
     }
-    
-    private static int getId(Mob mob) {
+
+    private static int getTargetId(Mob mob) {
         int val = mob.getId();
-        if(mob instanceof Player) {
+        if (mob instanceof Player) {
             val += 0x8000;
         }
         return val;

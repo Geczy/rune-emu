@@ -12,7 +12,7 @@ RuneEmulator::Utilities.create_npc(:normal, { :type => 1 }) { |npc|
 }
 
 # Bind the conversation option for all of the lumbridge NPCs
-RuneEmulator::Bootstrap.bind_npc_option(Option::ONE) { |player, npc, option, context|
+RuneEmulator::Bootstrap.bind_npc_option(:one) { |player, npc, option, context|
 	if option.eql?('talk-to')
 		if MEN_AND_WOMEN_TYPES.include?(npc.type)
 			player.start_action StartDialogueAction.new(player, npc, RuneEmulator::Utilities.get_dialogue(:lumbridge_man_woman))
@@ -51,4 +51,8 @@ RuneEmulator::Utilities.build_dialogue(:lumbridge_man_woman) { |builder|
 			context.stop
 		}
 	}
+}
+
+RuneEmulator::Utilities.build_dialogue(:lumbridge_hans) { |builder|
+
 }

@@ -7,11 +7,11 @@ import net.scapeemulator.game.model.player.InterfaceSet.Component;
 /**
  * Written by Hadyn Richard
  */
-public final class DialogueInputListener extends ComponentListenerAdapter {
+public final class DialogueContextListener extends ComponentListenerAdapter {
     
     private final DialogueContext context;
     
-    public DialogueInputListener(DialogueContext context) {
+    public DialogueContextListener(DialogueContext context) {
         this.context = context;
     }
 

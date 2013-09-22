@@ -2,6 +2,7 @@ require 'java'
 
 java_import 'net.scapeemulator.game.button.ButtonHandler'
 java_import 'net.scapeemulator.game.model.ExtendedOption'
+java_import 'net.scapeemulator.game.model.Option'
 java_import 'net.scapeemulator.game.item.ItemHandler'
 java_import 'net.scapeemulator.game.command.CommandHandler'
 java_import 'net.scapeemulator.game.item.ItemOnItemHandlerAdapter'
@@ -27,6 +28,13 @@ module RuneEmulator
 	# The list of NPCs to populate
 	NPC_LIST = World::getWorld().getNpcs()
 
+	# The mapping for all the regular options
+	OPTIONS = { :one => Option::ONE, :two => Option::TWO, :three => Option::THREE, :four => Option::FOUR, :five => Option::FIVE }
+
+	# THe mapping for the extended options
+	EXTENDED_OPTIONS = { :one => ExtendedOption::ONE, :two => ExtendedOption::TWO, :three => ExtendedOption::THREE, :four => ExtendedOption::FOUR, :five => ExtendedOption::FIVE,
+	                     :six => ExtendedOption::SIX, :seven => ExtendedOption::SEVEN, :eight => ExtendedOption::EIGHT, :nine => ExtendedOption::NINE }
+
 	class Bootstrap
 		class << self
 			def bind_cmd(name, permission=ADMINISTRATOR, &block)
@@ -40,18 +48,22 @@ module RuneEmulator
 
 				# If there are more arguments than the parent/child ids set the option
 				if args.length == 3
-					option = args[2]
+					option = EXTENDED_OPTIONS[args[2]]
 				end
 
 				$ctx.add_button_handler(ProcButtonHandler.new(option, args[0], args[1], block))
 			end
 
 			def bind_item_option(option, &block)
-				$ctx.add_item_handler(ProcItemHandler.new(option, block))
+				$ctx.add_item_handler(ProcItemHandler.new(OPTIONS[option], block))
 			end
 
 			def bind_object_option(option, &block)
-				$ctx.add_object_handler(ProcObjectHandler.new(option, block))
+				$ctx.add_object_handler(ProcObjectHandler.new(OPTIONS[option], block))
+			end
+
+			def bind_npc_option(option, &block)
+				$ctx.add_npc_handler(ProcNPCHandler.new(OPTIONS[option], block))
 			end
 
 			def bind_item_on_object(item, object, &block)
@@ -67,10 +79,6 @@ module RuneEmulator
 				end
 
 				$ctx.add_item_on_item_handler(handler)
-			end
-
-			def bind_npc_option(option, &block)
-				$ctx.add_npc_handler(ProcNPCHandler.new(option, block))
 			end
 		end
 
@@ -188,7 +196,6 @@ module RuneEmulator
 					npc = NormalNPC.new(params[:type])
 					yield npc
 					NPC_LIST.add(npc)
-					npc
 				end
 			end
 
@@ -208,7 +215,7 @@ module RuneEmulator
 
 			def append_start(&block)
 				stage = StageWrapper.new
-				block.call(stage)
+				yield stage
 
 				@dialogue = Dialogue.new
 				@dialogue.set_starting_stage(stage)
@@ -216,7 +223,7 @@ module RuneEmulator
 
 			def append_stage(name, &block)
 				stage = StageWrapper.new
-				block.call(stage)
+				yield stage
 				@dialogue.add_stage(name, stage)
 			end
 
