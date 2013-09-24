@@ -38,7 +38,9 @@ RuneEmulator::Bootstrap.bind_cmd('state') { |player, args|
 }
 
 RuneEmulator::Bootstrap.bind_cmd('obj') { |player, args|
-  World::getWorld().getGroundObjects().put(player.position, args[0].to_i, args[1].to_i, ObjectType::PROP)
+  rot = 0
+  rot = args[1].to_i if args.length > 1
+  World::getWorld().getGroundObjects().put(player.position, args[0].to_i, rot, ObjectType::PROP)
 }
 
 RuneEmulator::Bootstrap.bind_cmd('anim') { |player, args|
