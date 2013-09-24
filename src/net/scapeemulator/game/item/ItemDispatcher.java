@@ -89,7 +89,7 @@ public final class ItemDispatcher {
      */
     private static String getOptionName(int id, Option option) {
         String optionName = ItemDefinitions.forId(id).getInventoryOptions()[option.toInteger()];
-        return optionName == null ? "null" : optionName;
+        return optionName == null ? "null" : optionName.toLowerCase();
     }
 
 
