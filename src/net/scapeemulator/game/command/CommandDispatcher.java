@@ -11,7 +11,6 @@ public final class CommandDispatcher {
 
     public CommandDispatcher() {
         bind(new TeleportCommandHandler());
-        bind(new ItemCommandHandler());
         bind(new EmptyCommandHandler());
         bind(new PositionCommandHandler());
         bind(new MasterCommandHandler());
