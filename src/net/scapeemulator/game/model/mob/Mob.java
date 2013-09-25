@@ -94,6 +94,9 @@ public abstract class Mob extends Entity {
         return secondDirection;
     }
 
+    public boolean notWalking() {
+    	return firstDirection == Direction.NONE && secondDirection == Direction.NONE; 
+    }
     public Direction getMostRecentDirection() {
         return mostRecentDirection;
     }
