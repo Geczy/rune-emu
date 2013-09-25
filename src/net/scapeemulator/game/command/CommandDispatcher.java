@@ -13,7 +13,6 @@ public final class CommandDispatcher {
         bind(new TeleportCommandHandler());
         bind(new EmptyCommandHandler());
         bind(new PositionCommandHandler());
-        bind(new MasterCommandHandler());
     }
 
     public void bind(CommandHandler handler) {
