@@ -5,6 +5,7 @@ java_import 'net.scapeemulator.game.model.World'
 java_import 'net.scapeemulator.game.model.object.ObjectType'
 java_import 'net.scapeemulator.game.model.mob.Animation'
 java_import 'net.scapeemulator.game.model.player.Item'
+java_import 'net.scapeemulator.game.model.player.SkillSet'
 # Common administrator commands
 
 RuneEmulator::Bootstrap.bind_cmd('window') { |player, args|
@@ -50,3 +51,11 @@ RuneEmulator::Bootstrap.bind_cmd('anim') { |player, args|
 RuneEmulator::Bootstrap.bind_cmd('reload') { |player, args|
   GameServer::getInstance().reloadPlugins()
 }
+
+RuneEmulator::Bootstrap.bind_cmd('master') { |player, args|
+  skills = player.getSkillSet()
+  for id in 0...Skill::AMOUNT_SKILLS
+    skills.addExperience(id, SkillSet::MAXIMUM_EXPERIENCE)
+  end
+}
+
