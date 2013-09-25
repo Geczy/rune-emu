@@ -58,4 +58,8 @@ RuneEmulator::Bootstrap.bind_cmd('master') { |player, args|
     skills.addExperience(id, SkillSet::MAXIMUM_EXPERIENCE)
   end
 }
+RuneEmulator::Bootstrap.bind_cmd('empty') { |player, args|
+  player.getInventory().empty()
+}
+
 
