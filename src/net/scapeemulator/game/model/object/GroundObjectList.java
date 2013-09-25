@@ -276,7 +276,17 @@ public final class GroundObjectList {
                isHidden = false;
            }
         }
-                       
+        
+        /**
+         * Calculates the center Position of this object
+         */
+        public Position getCenterPosition() {
+        	ObjectDefinition def = ObjectDefinitions.forId(id);
+        	int centerX = position.getX() + (def.getWidth()/2);
+        	int centerY = position.getY() + (def.getLength()/2);
+        	return new Position(centerX, centerY);
+        }
+        
         /** 
          * Calculates the turn to position.
          */
