@@ -1,14 +1,8 @@
 require 'java'
 
-java_import 'net.scapeemulator.game.model.World'
-java_import 'net.scapeemulator.game.model.object.ObjectOrientation'
 java_import 'net.scapeemulator.game.model.object.GroundObjectListenerAdapter'
-java_import 'net.scapeemulator.game.model.object.ObjectType'
-java_import 'net.scapeemulator.game.model.Position'
-java_import 'net.scapeemulator.game.model.Option'
 java_import 'net.scapeemulator.game.task.Task'
 java_import 'net.scapeemulator.game.task.DistancedAction'
-java_import 'net.scapeemulator.game.model.mob.Animation'
 java_import 'net.scapeemulator.game.model.player.Equipment'
 
 =begin
@@ -65,7 +59,6 @@ MAGIC_TREES = [1292, 1306]
 
 module RuneEmulator
   class Woodcutting
-    
     class << self
       def bind_handlers()
         Bootstrap.bind_object_option(:one) { |player, object, option, context|
@@ -79,7 +72,7 @@ module RuneEmulator
       end
 
       def create_tree_types()
-                         #lvl, xp, log id, max logs, respawn time, stump id
+        #lvl, xp, log id, max logs, respawn time, stump id
         TREE_TYPES[:normal] = TreeType.new(1, 25, 1511, 1, 3, 1342)
         TREE_TYPES[:achey]= TreeType.new(1, 25, 2862, 1, 10, 3371)
         TREE_TYPES[:oak] = TreeType.new(15, 37.5, 1521, 6, 10, 1342)
@@ -127,14 +120,14 @@ module RuneEmulator
           timber()
         end
       end
-      
+
       #regrow tree, called by the regrow task
       def regrow()
         @object.setId(@original_id)
         @logs_left = 1 + rand(@tree_type.log_amount)
         p @logs_left
       end
-      
+
       #TIMBERRRRR! Out of logs, turn into stump and schedule regrow task
       def timber()
         @object.setId(@tree_type.stump_id)
@@ -213,7 +206,7 @@ module RuneEmulator
           @player.playAnimation(@hatchet.animation)
           @started = true
           get_next_log()
-        return
+        #return
         end
 
         @player.playAnimation(@hatchet.animation)
