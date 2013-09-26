@@ -27,7 +27,11 @@ module RuneEmulator
 
 	# The list of NPCs to populate
 	NPC_LIST = World::getWorld().getNpcs()
-
+  TASK_SCHEDULER = World::getWorld().getTaskScheduler()
+  OBJECT_LIST = World::getWorld().getGroundObjects()
+  
+  CANCEL_ANIMATION = Animation.new(-1)
+  
 	# The mapping for all the regular options
 	OPTIONS = { :one => Option::ONE, :two => Option::TWO, :three => Option::THREE, :four => Option::FOUR, :five => Option::FIVE }
 
