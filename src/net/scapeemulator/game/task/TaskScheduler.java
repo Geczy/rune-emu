@@ -16,7 +16,6 @@ public final class TaskScheduler {
 	public void tick() {
 		for (Task task : taskQueue) {
 			tasks.add(task);
-			taskQueue.remove(task);
 		}
 		for (Iterator<Task> it = tasks.iterator(); it.hasNext();) {
 			Task task = it.next();
