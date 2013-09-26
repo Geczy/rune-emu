@@ -58,8 +58,17 @@ RuneEmulator::Bootstrap.bind_cmd('master') { |player, args|
     skills.addExperience(id, SkillSet::MAXIMUM_EXPERIENCE)
   end
 }
+
 RuneEmulator::Bootstrap.bind_cmd('empty') { |player, args|
   player.getInventory().empty()
 }
 
+RuneEmulator::Bootstrap.bind_cmd('tele') { |player, args|
+  h = player.get_position.height
+  h = args[2].to_i if args.length > 2
+  player.teleport(Position.new(args[0].to_i, args[1].to_i, h));
+}
 
+RuneEmulator::Bootstrap.bind_cmd('pos') { |player, args|
+  player.send_message(player.position.to_string);
+}

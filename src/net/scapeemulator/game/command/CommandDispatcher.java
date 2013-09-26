@@ -9,11 +9,6 @@ public final class CommandDispatcher {
 
     private final Map<String, CommandHandler> handlers = new HashMap<>();
 
-    public CommandDispatcher() {
-        bind(new TeleportCommandHandler());
-        bind(new PositionCommandHandler());
-    }
-
     public void bind(CommandHandler handler) {
         handlers.put(handler.getName(), handler);
     }
