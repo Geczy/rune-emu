@@ -31,7 +31,7 @@ java_import 'net.scapeemulator.game.model.player.Equipment'
 */
 =end
 
-#<Identifier, TreeType>
+#<IDS_ARRAY, TreeType>
 TREE_TYPES =  {}
 
 #<ID, Hatchet>
@@ -40,7 +40,7 @@ HATCHETS = {}
 #<Position, Tree>
 TREES = {}
 
-#Object IDs for each of the TreeTypes
+#Object IDs for each of the TreeTypes, still need to find a lot
 NORMAL_TREES =  [ 1276, 1277, 1278, 1279, 1280, 1282, 1283, 1284, 1285, 1285,
   1286, 1289, 1290, 1291, 1315, 1316, 1318, 1330, 1331, 1332,
   1365, 1383, 1384, 2409, 3033, 3034, 3035, 3036, 3881, 3882,
@@ -60,7 +60,7 @@ MAGIC_TREES = [1292, 1306]
 module RuneEmulator
   class Woodcutting
     class << self
-      def bind_handlers()
+      def bind_handlers
         Bootstrap.bind_object_option(:one) { |player, object, option, context|
           if option.eql?("chop down")
             if TREES.include?(object.position)
@@ -71,22 +71,22 @@ module RuneEmulator
         }
       end
 
-      def create_tree_types()
+      def create_tree_types
         #lvl, xp, log id, max logs, respawn time, stump id
-        TREE_TYPES[:normal] = TreeType.new(1, 25, 1511, 1, 3, 1342)
-        TREE_TYPES[:achey]= TreeType.new(1, 25, 2862, 1, 10, 3371)
-        TREE_TYPES[:oak] = TreeType.new(15, 37.5, 1521, 6, 10, 1342)
-        TREE_TYPES[:willow] = TreeType.new(30, 67.5, 1519, 10, 20, 1342)
-        TREE_TYPES[:teak] = TreeType.new(35, 85, 6333, 10, 30, 1342)
-        TREE_TYPES[:maple] = TreeType.new(45, 100, 1517, 10, 35, 1342)
-        TREE_TYPES[:mahogany] = TreeType.new(50, 125, 6332, 10, 45, 1342)
-        TREE_TYPES[:arctic_pine] = TreeType.new(54, 140, 10810, 10, 45, 1342)
-        TREE_TYPES[:eucalyptus] = TreeType.new(58, 165, 12581, 10, 45, 1342)
-        TREE_TYPES[:yew] = TreeType.new(60, 175, 1515, 15, 60, 1342)
-        TREE_TYPES[:magic] = TreeType.new(75, 250, 1513, 20, 120, 1342)
+        TREE_TYPES[NORMAL_TREES] = TreeType.new(1, 25, 1511, 1, 3, 1342)
+        TREE_TYPES[ACHEY_TREES]= TreeType.new(1, 25, 2862, 1, 10, 3371)
+        TREE_TYPES[OAK_TREES] = TreeType.new(15, 37.5, 1521, 6, 10, 1342)
+        TREE_TYPES[WILLOW_TREES] = TreeType.new(30, 67.5, 1519, 10, 20, 1342)
+        TREE_TYPES[TEAK_TREES] = TreeType.new(35, 85, 6333, 10, 30, 1342)
+        TREE_TYPES[MAPLE_TREES] = TreeType.new(45, 100, 1517, 10, 35, 1342)
+        TREE_TYPES[MAHOGANY_TREES] = TreeType.new(50, 125, 6332, 10, 45, 1342)
+        TREE_TYPES[ARCTIC_PINE_TREES] = TreeType.new(54, 140, 10810, 10, 45, 1342)
+        TREE_TYPES[EUCALYPTUS_TREES] = TreeType.new(58, 165, 12581, 10, 45, 1342)
+        TREE_TYPES[YEW_TREES] = TreeType.new(60, 175, 1515, 15, 60, 1342)
+        TREE_TYPES[MAGIC_TREES] = TreeType.new(75, 250, 1513, 20, 120, 1342)
       end
 
-      def create_hatchets()
+      def create_hatchets
         HATCHETS[1351] = Hatchet.new(1, Animation.new(879), 1) # Bronze
         HATCHETS[1349] = Hatchet.new(1, Animation.new(877), 2) # Iron
         HATCHETS[1353] = Hatchet.new(6, Animation.new(875), 3) # Steel
@@ -98,14 +98,14 @@ module RuneEmulator
         HATCHETS[13661] = Hatchet.new(61, Animation.new(10251), 9) # Inferno adze
       end
 
-      def refresh()
+      def refresh
         OBJECT_LIST.fire_all_events(TreeObjectListener.new)
       end
 
     end
 
     class Tree
-      attr_accessor :tree_type, :object, :logs_left
+      attr_reader :tree_type, :object, :logs_left
       def initialize(object, tree_type)
         @object = object
         @original_id = object.id
@@ -114,23 +114,22 @@ module RuneEmulator
       end
 
       #remove one log, called any time a player successfully chops
-      def chop_a_log()
+      def chop_a_log
         @logs_left -= 1
         if @logs_left < 1
-          timber()
+          timber
         end
       end
 
       #regrow tree, called by the regrow task
-      def regrow()
-        @object.setId(@original_id)
+      def regrow
+        @object.id = @original_id
         @logs_left = 1 + rand(@tree_type.log_amount)
-        p @logs_left
       end
 
       #TIMBERRRRR! Out of logs, turn into stump and schedule regrow task
-      def timber()
-        @object.setId(@tree_type.stump_id)
+      def timber
+        @object.id = @tree_type.stump_id
         TASK_SCHEDULER.schedule(RegrowTask.new(self))
       end
     end
@@ -143,20 +142,20 @@ module RuneEmulator
       end
 
       def get_wc_lvl
-        return @player.getSkillSet().getCurrentLevel(Skill::WOODCUTTING)
+        return @player.get_skill_set.get_current_level(Skill::WOODCUTTING)
       end
 
       #use either the currently equipped hatchet if we have the requirement, or the best in the inventory. is the equipped one supposed to overrule the inventory?
       def find_hatchet
-        weapon = @player.getEquipment.get(Equipment::WEAPON)
-        if !weapon.nil? && HATCHETS.include?(weapon.getId) && get_wc_lvl() >= HATCHETS[weapon.getId].level
-          return HATCHETS[weapon.getId]
+        weapon = @player.get_equipment.get(Equipment::WEAPON)
+        if !weapon.nil? && HATCHETS.include?(weapon.id) && get_wc_lvl >= HATCHETS[weapon.id].level
+          return HATCHETS[weapon.id]
         else
           best_hatchet = nil
-          HATCHETS.each { |id, hatchet|
+          HATCHETS.each do |id, hatchet|
             next if(!best_hatchet.nil? && HATCHETS[id].speed < best_hatchet.speed)
-            (best_hatchet = hatchet) if (@player.getInventory.slotOf(id) > -1 && get_wc_lvl() >= hatchet.level)
-          }
+            (best_hatchet = hatchet) if (@player.get_inventory.slot_of(id) > -1 && get_wc_lvl >= hatchet.level)
+          end
         return best_hatchet
         end
       end
@@ -166,63 +165,63 @@ module RuneEmulator
         @next_log = rand(2) + 2
       end
 
-      def executeAction
+      def execute_action
         if @tree.logs_left < 1
-          @player.sendMessage("This tree has run out of logs.")
-          stop()
+          @player.send_message("This tree has run out of logs.")
+          stop
         return
         end
 
-        if !@player.notWalking() || !@player.getWalkingQueue().isEmpty()
+        if !@player.not_walking || !@player.get_walking_queue.is_empty
         return
         end
 
         if !@turned
-          @player.turnToPosition(@tree.object.getCenterPosition())
+          @player.turn_to_position(@tree.object.get_center_position)
           @turned = true
         end
 
-        if get_wc_lvl() < @tree.tree_type.lvl_req
-          @player.sendMessage("You need a Woodcutting level of #{@tree.tree_type.lvl_req} to cut this tree.")
-          stop()
+        if get_wc_lvl < @tree.tree_type.lvl_req
+          @player.send_message("You need a Woodcutting level of #{@tree.tree_type.lvl_req} to cut this tree.")
+          stop
         return
         end
 
         @hatchet = find_hatchet
         if @hatchet.nil?
-          @player.sendMessage("You do not have an axe that you have the Woodcutting level to use.")
-          stop()
+          @player.send_message("You do not have an axe that you have the Woodcutting level to use.")
+          stop
         return
         end
 
-        if @player.getInventory().freeSlots() < 1
-          @player.sendMessage("Your inventory is too full to hold any more logs.")
-          stop()
+        if @player.get_inventory.free_slots < 1
+          @player.send_message("Your inventory is too full to hold any more logs.")
+          stop
         return
         end
 
         if !@started
-          @player.sendMessage("You swing your axe at the tree.")
-          @player.playAnimation(@hatchet.animation)
+          @player.send_message("You swing your axe at the tree.")
+          @player.play_animation(@hatchet.animation)
           @started = true
-          get_next_log()
+          get_next_log
         #return
         end
 
-        @player.playAnimation(@hatchet.animation)
+        @player.play_animation(@hatchet.animation)
         @next_log -= 1
         if @next_log < 1
-          @player.getInventory().add(Item.new(@tree.tree_type.log_id))
-          @player.sendMessage("You get some logs.")
-          @player.getSkillSet().addExperience(Skill::WOODCUTTING, @tree.tree_type.xp)
+          @player.get_inventory.add(Item.new(@tree.tree_type.log_id))
+          @player.send_message("You get some logs.")
+          @player.get_skill_set.add_experience(Skill::WOODCUTTING, @tree.tree_type.xp)
           @tree.chop_a_log
           if @tree.logs_left < 1
-            @player.sendMessage("This tree has run out of logs.")
-            @player.playAnimation(CANCEL_ANIMATION)
-            stop()
+            @player.send_message("This tree has run out of logs.")
+            @player.play_animation(CANCEL_ANIMATION)
+            stop
           return
           end
-          get_next_log()
+          get_next_log
         end
       end
 
@@ -234,42 +233,25 @@ module RuneEmulator
         @tree = tree
       end
 
-      def execute()
-        @tree.regrow()
-        stop()
+      def execute
+        @tree.regrow
+        stop
       end
     end
 
     class TreeObjectListener < GroundObjectListenerAdapter
-      def groundObjectAdded(object)
-        if NORMAL_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:normal])
-        elsif ACHEY_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:achey])
-        elsif OAK_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:oak])
-        elsif WILLOW_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:willow])
-        elsif TEAK_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:teak])
-        elsif MAPLE_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:maple])
-        elsif MAHOGANY_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:mahogany])
-        elsif ARCTIC_PINE_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:arctic_pine])
-        elsif EUCALYPTUS_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:eucalyptus])
-        elsif YEW_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:yew])
-        elsif MAGIC_TREES.include?(object.id)
-          TREES[object.position] = Tree.new(object, TREE_TYPES[:magic])
+      def ground_object_added(object)
+        TREE_TYPES.each do |ids, tree_type|
+          if ids.include?object.id
+            TREES[object.position] = Tree.new(object, tree_type)
+            break
+          end
         end
       end
     end
 
     class TreeType
-      attr_accessor :lvl_req, :xp, :log_id, :log_amount, :respawn_delay, :stump_id
+      attr_reader :lvl_req, :xp, :log_id, :log_amount, :respawn_delay, :stump_id
       def initialize(lvl_req, xp, log_id, log_amount, respawn_delay, stump_id)
         @lvl_req = lvl_req
         @xp = xp
@@ -282,7 +264,7 @@ module RuneEmulator
     end
 
     class Hatchet
-      attr_accessor :level, :animation, :speed
+      attr_reader :level, :animation, :speed
       def initialize(level, animation, speed)
         @level = level
         @animation = animation
@@ -292,7 +274,7 @@ module RuneEmulator
   end
 end
 
-RuneEmulator::Woodcutting.create_tree_types()
-RuneEmulator::Woodcutting.create_hatchets()
-RuneEmulator::Woodcutting.bind_handlers()
-RuneEmulator::Woodcutting.refresh()
+RuneEmulator::Woodcutting.create_tree_types
+RuneEmulator::Woodcutting.create_hatchets
+RuneEmulator::Woodcutting.bind_handlers
+RuneEmulator::Woodcutting.refresh
