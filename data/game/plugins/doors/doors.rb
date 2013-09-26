@@ -12,9 +12,6 @@ java_import 'net.scapeemulator.game.model.Door'
 module RuneEmulator
 	class Doors
 
-		# The worlds object list to grab objects from
-		OBJECT_LIST = World::getWorld().getGroundObjects()
-
 		# States for if the door is opened or closed
 		OPENED = 0
 		CLOSED = 1
