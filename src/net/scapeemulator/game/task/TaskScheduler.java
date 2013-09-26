@@ -17,6 +17,7 @@ public final class TaskScheduler {
 		for (Task task : taskQueue) {
 			tasks.add(task);
 		}
+		taskQueue.clear();
 		for (Iterator<Task> it = tasks.iterator(); it.hasNext();) {
 			Task task = it.next();
 			if (!task.isRunning()) {
