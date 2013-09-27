@@ -165,7 +165,7 @@ module RuneEmulator
         @next_log = rand(2) + 2
       end
 
-      def execute_action
+      def executeAction
         if @tree.logs_left < 1
           @player.send_message("This tree has run out of logs.")
           stop
@@ -240,7 +240,7 @@ module RuneEmulator
     end
 
     class TreeObjectListener < GroundObjectListenerAdapter
-      def ground_object_added(object)
+      def groundObjectAdded(object)
         TREE_TYPES.each do |ids, tree_type|
           if ids.include?object.id
             TREES[object.position] = Tree.new(object, tree_type)
