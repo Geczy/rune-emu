@@ -137,7 +137,9 @@ module RuneEmulator
       end
 
       def refresh
-        OBJECT_LIST.fire_all_events(RockObjectListener.new)
+        listener = RockObjectListener.new
+        OBJECT_LIST.fire_all_events(listener)
+        OBJECT_LIST.add_listener(listener)
       end
 
     end

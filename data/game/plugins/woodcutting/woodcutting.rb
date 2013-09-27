@@ -99,7 +99,9 @@ module RuneEmulator
       end
 
       def refresh
-        OBJECT_LIST.fire_all_events(TreeObjectListener.new)
+        listener = TreeObjectListener.new
+        OBJECT_LIST.fire_all_events(listener)
+        OBJECT_LIST.add_listener(listener)
       end
 
     end
@@ -244,7 +246,7 @@ module RuneEmulator
         TREE_TYPES.each do |ids, tree_type|
           if ids.include?object.id
             TREES[object.position] = Tree.new(object, tree_type)
-            break
+          break
           end
         end
       end
