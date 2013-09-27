@@ -15,7 +15,7 @@ RuneEmulator::Bootstrap.bind_cmd('window') { |player, args|
 RuneEmulator::Bootstrap.bind_cmd('item') { |player, args|
   amount = 1
   amount = args[1].to_i if args.length > 1
-  player.getInventory().add(Item.new(args[0].to_i, amount));
+  player.get_inventory.add(Item.new(args[0].to_i, amount));
 }
 
 RuneEmulator::Bootstrap.bind_cmd('chatbox') { |player, args|
@@ -41,7 +41,7 @@ RuneEmulator::Bootstrap.bind_cmd('state') { |player, args|
 RuneEmulator::Bootstrap.bind_cmd('obj') { |player, args|
   rot = 0
   rot = args[1].to_i if args.length > 1
-  World::getWorld().getGroundObjects().put(player.position, args[0].to_i, rot, ObjectType::PROP)
+  RuneEmulator::OBJECT_LIST.put(player.position, args[0].to_i, rot, ObjectType::PROP)
 }
 
 RuneEmulator::Bootstrap.bind_cmd('anim') { |player, args|
@@ -53,14 +53,14 @@ RuneEmulator::Bootstrap.bind_cmd('reload') { |player, args|
 }
 
 RuneEmulator::Bootstrap.bind_cmd('master') { |player, args|
-  skills = player.getSkillSet()
+  skills = player.get_skill_set
   for id in 0...Skill::AMOUNT_SKILLS
-    skills.addExperience(id, SkillSet::MAXIMUM_EXPERIENCE)
+    skills.add_experience(id, SkillSet::MAXIMUM_EXPERIENCE)
   end
 }
 
 RuneEmulator::Bootstrap.bind_cmd('empty') { |player, args|
-  player.getInventory().empty()
+  player.get_inventory.empty
 }
 
 RuneEmulator::Bootstrap.bind_cmd('tele') { |player, args|
