@@ -298,4 +298,9 @@ public final class DialogueContext {
         }
         return builder.toString().split("\n");
     }
+    
+    private Player getPlayer() {
+    	return player;
+    }
+
 }

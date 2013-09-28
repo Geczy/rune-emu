@@ -1,4 +1,4 @@
 {
-	"scripts" : [ "commands.rb", "skill_menu.rb", "item_equip.rb"],
+	"scripts" : [ "commands.rb", "skill_menu.rb", "buttons.rb"],
 	"dependencies" : []
 }
