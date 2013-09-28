@@ -51,23 +51,23 @@ module RuneEmulator
 			end
 
 			def bind_handlers()
-				Bootstrap.bind_object_option(:one) { |player, door, option, context|
+				Bootstrap.bind_object_option(:one) do |player, door, option, context|
 					if option.eql?("open")
 						if DOORS.include?(door.position)
 							player.start_action(OpenDoorAction.new(player, door.position, DOORS[door.position], true))
 							context.stop
 						end
 					end
-				}
+				end
 
-				Bootstrap.bind_object_option(:one) { |player, door, option, context|
+				Bootstrap.bind_object_option(:one) do |player, door, option, context|
 					if option.eql?("close")
 						if DOORS.include?(door.position)
 							player.start_action(OpenDoorAction.new(player, door.position, DOORS[door.position], false))
 							context.stop
 						end
 					end
-				}
+				end
 			end
 
 			def create_door(object)
@@ -81,10 +81,10 @@ module RuneEmulator
 
 				objects = {}
 
-				[ :opened, :closed ].each { |type|
+				[ :opened, :closed ].each do |type|
 					object = objects[type] = data.get_object(origin, orientation, type)
 					OBJECTS << object
-				}
+				end
 
 				SingleTileDoor.new(objects[:opened], objects[:closed]).bind
 			end
@@ -123,10 +123,10 @@ module RuneEmulator
 
 				objects = {}
 
-				[ :opened_left, :opened_right, :closed_left, :closed_right ].each { |type|
+				[ :opened_left, :opened_right, :closed_left, :closed_right ].each do |type|
 					object = objects[type] = data.get_object(origin, orientation, type)
 					OBJECTS << object
-				}
+				end
 
 				DoubleTileDoor.new(objects[:opened_left], objects[:opened_right], objects[:closed_left], objects[:closed_right]).bind
 			end
@@ -179,7 +179,8 @@ module RuneEmulator
 
 			# Each of the orientations
 			# Orientation One: North, Orientation Two: South, Orientation Three: East, Orientation Four: West
-			ORIENTATIONS = { ORIENTATION_ONE   => { :closed => { :x => 0, :y => 0, :rotation => 1 }, :opened => { :x =>  0, :y =>  1, :rotation => 2 } }, 
+			ORIENTATIONS = { 
+							 ORIENTATION_ONE   => { :closed => { :x => 0, :y => 0, :rotation => 1 }, :opened => { :x =>  0, :y =>  1, :rotation => 2 } }, 
 			                 ORIENTATION_TWO   => { :closed => { :x => 0, :y => 0, :rotation => 3 }, :opened => { :x =>  0, :y => -1, :rotation => 0 } }, 
 			                 ORIENTATION_THREE => { :closed => { :x => 0, :y => 0, :rotation => 2 }, :opened => { :x =>  1, :y =>  0, :rotation => 3 } }, 
 			                 ORIENTATION_FOUR  => { :closed => { :x => 0, :y => 0, :rotation => 0 }, :opened => { :x => -1, :y =>  0, :rotation => 1 } } 
@@ -191,6 +192,7 @@ module RuneEmulator
 			end
 
 			def get_origin(position, rotation, state)
+				
 				delta = { :x => 0, :y => 0 }
 
 				case state

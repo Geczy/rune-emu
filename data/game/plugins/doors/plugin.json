@@ -1,4 +1,5 @@
 {
+	"authors" : [ "sinisoul" ],
 	"scripts" : [ "doors.rb" ],
 	"dependencies" : []
 }
