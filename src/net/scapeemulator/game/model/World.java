@@ -1,9 +1,7 @@
 package net.scapeemulator.game.model;
 
-import net.scapeemulator.game.model.area.QuadArea;
 import net.scapeemulator.game.model.grounditem.GroundItemList;
 import net.scapeemulator.game.model.npc.NPC;
-import net.scapeemulator.game.model.npc.stateful.impl.NormalNPC;
 import net.scapeemulator.game.model.object.GroundObjectList;
 import net.scapeemulator.game.model.pathfinding.ObjectDataListener;
 import net.scapeemulator.game.model.pathfinding.TraversalMap;
