@@ -34,8 +34,8 @@ module RuneEmulator
       def bind_handlers
         bind :obj do
           if option.eql?("mine")
-            if ROCKS.include?(object.position)
-              player.start_action(MiningAction.new(player, ROCKS[object.position]))
+            if ROCKS.include?(obj.position)
+              player.start_action(MiningAction.new(player, ROCKS[obj.position]))
               ctx.stop
             end
           end
