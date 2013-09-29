@@ -63,8 +63,8 @@ module RuneEmulator
       def bind_handlers
         bind :obj do
           if option.eql?("chop down")
-            if TREES.include?(object.position)
-              player.start_action(WoodcuttingAction.new(player, TREES[object.position]))
+            if TREES.include?(obj.position)
+              player.start_action(WoodcuttingAction.new(player, TREES[obj.position]))
               ctx.stop
             end
           end
