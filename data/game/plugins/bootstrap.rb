@@ -132,7 +132,7 @@ def create_handler(type, params, block)
 		context = Object.const_get("#{type.formatted_name}Context")
 
 		context.class_eval do
-			attr_reader *type.dispatcher_params
+			attr_reader *(type.dispatcher_params + type.local_args)
 
 			define_method(:initialize) do |block, values|
 
