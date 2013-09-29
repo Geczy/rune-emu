@@ -9,6 +9,8 @@ import net.scapeemulator.game.task.Action;
 
 public abstract class Mob extends Entity {
 
+    private static final Animation CANCEL_ANIMATION = new Animation(-1);
+
     protected int id;
     protected boolean teleporting;
     protected final WalkingQueue walkingQueue = new WalkingQueue(this);
@@ -97,6 +99,7 @@ public abstract class Mob extends Entity {
     public boolean notWalking() {
     	return firstDirection == Direction.NONE && secondDirection == Direction.NONE; 
     }
+
     public Direction getMostRecentDirection() {
         return mostRecentDirection;
     }
@@ -134,6 +137,10 @@ public abstract class Mob extends Entity {
 
     public void playAnimation(Animation animation) {
         this.animation = animation;
+    }
+
+    public void cancelAnimation() {
+        animation = CANCEL_ANIMATION;
     }
 
     public void playSpotAnimation(SpotAnimation spotAnimation) {

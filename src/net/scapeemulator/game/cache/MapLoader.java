@@ -26,8 +26,7 @@ public final class MapLoader {
     private static final Logger logger = LoggerFactory.getLogger(MapLoader.class);
     private final List<MapListener> listeners = new LinkedList<MapListener>();
 
-    public MapLoader() {
-    }
+    public MapLoader() {}
 
     public void addListener(MapListener listener) {
         listeners.add(listener);

@@ -6,69 +6,71 @@ java_import 'net.scapeemulator.game.model.object.ObjectType'
 java_import 'net.scapeemulator.game.model.mob.Animation'
 java_import 'net.scapeemulator.game.model.player.Item'
 java_import 'net.scapeemulator.game.model.player.SkillSet'
+java_import 'net.scapeemulator.game.model.object.ObjectOrientation'
+
 # Common administrator commands
 
-RuneEmulator::Bootstrap.bind_cmd('window') { |player, args|
+bind :cmd, :name => 'window' do 
   player.interface_set.open_window(args[0].to_i)
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('item') { |player, args|
+bind :cmd, :name => 'item' do 
   amount = 1
   amount = args[1].to_i if args.length > 1
   player.get_inventory.add(Item.new(args[0].to_i, amount));
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('chatbox') { |player, args|
+bind :cmd, :name => 'chatbox' do 
   player.interface_set.open_chatbox(args[0].to_i)
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('inventory') { |player, args|
+bind :cmd, :name => 'inventory' do 
   player.interface_set.open_inventory(args[0].to_i)
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('text') { |player, args|
+bind :cmd, :name => 'text' do 
   player.set_interface_text(args[0].to_i, args[1].to_i, args[2])
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('bitstate') { |player, args|
+bind :cmd, :name => 'bitstate' do 
   player.state_set.set_bit_state(args[0].to_i, args[1].to_i)
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('state') { |player, args|
+bind :cmd, :name => 'state' do 
   player.state_set.set_state(args[0].to_i, args[1].to_i)
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('obj') { |player, args|
-  rot = 0
+bind :cmd, :name => 'object' do
+  rot = ObjectOrientation::WEST
   rot = args[1].to_i if args.length > 1
   RuneEmulator::OBJECT_LIST.put(player.position, args[0].to_i, rot, ObjectType::PROP)
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('anim') { |player, args|
+bind :cmd, :name => 'anim' do 
   player.playAnimation(Animation.new(args[0].to_i))
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('reload') { |player, args|
+bind :cmd, :name => 'reload' do 
   GameServer::getInstance().reloadPlugins()
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('master') { |player, args|
+bind :cmd, :name => 'master' do 
   skills = player.get_skill_set
   for id in 0...Skill::AMOUNT_SKILLS
     skills.add_experience(id, SkillSet::MAXIMUM_EXPERIENCE)
   end
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('empty') { |player, args|
+bind :cmd, :name => 'empty' do 
   player.get_inventory.empty
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('tele') { |player, args|
+bind :cmd, :name => 'tele' do 
   h = player.get_position.height
   h = args[2].to_i if args.length > 2
   player.teleport(Position.new(args[0].to_i, args[1].to_i, h));
-}
+end
 
-RuneEmulator::Bootstrap.bind_cmd('pos') { |player, args|
+bind :cmd, :name => 'pos' do 
   player.send_message(player.position.to_string);
-}
+end

@@ -12,14 +12,12 @@ FLASHING_ICON_VARBIT  = 4729
 MAIN_INFO_VARBIT      = 3288
 CHILD_INFO_VARBIT     = 3289
 
-SKILL_BUTTONS = { 
-				  Skill::ATTACK => 125, Skill::STRENGTH => 126, Skill::DEFENCE => 127, Skill::RANGED => 128,
-                  Skill::PRAYER => 129, Skill::MAGIC => 130, Skill::RUNECRAFTING => 131, Skill::CONSTRUCTION => 132,
-                  Skill::HITPOINTS => 133, Skill::AGILITY => 134, Skill::HERBLORE => 135, Skill::THIEVING => 136,
-                  Skill::CRAFTING => 137, Skill::FLETCHING => 138, Skill::SLAYER => 139, Skill::HUNTER => 140,
-                  Skill::MINING => 141, Skill::SMITHING => 142, Skill::FISHING => 143, Skill::COOKING => 144,
-                  Skill::FIREMAKING => 145, Skill::WOODCUTTING => 146, Skill::FARMING => 147, Skill::SUMMONING => 148
-                }
+SKILL_BUTTONS =	{ 	Skill::ATTACK => 125, Skill::STRENGTH => 126, Skill::DEFENCE => 127, Skill::RANGED => 128,
+                  	Skill::PRAYER => 129, Skill::MAGIC => 130, Skill::RUNECRAFTING => 131, Skill::CONSTRUCTION => 132,
+                  	Skill::HITPOINTS => 133, Skill::AGILITY => 134, Skill::HERBLORE => 135, Skill::THIEVING => 136,
+                  	Skill::CRAFTING => 137, Skill::FLETCHING => 138, Skill::SLAYER => 139, Skill::HUNTER => 140,
+                  	Skill::MINING => 141, Skill::SMITHING => 142, Skill::FISHING => 143, Skill::COOKING => 144,
+                  	Skill::FIREMAKING => 145, Skill::WOODCUTTING => 146, Skill::FARMING => 147, Skill::SUMMONING => 148	}
 
 module RuneEmulator
 	class SkillMenu
@@ -52,13 +50,13 @@ module RuneEmulator
 end
 
 for i in (0...AMOUNT_CHILD_BUTTONS)
-	RuneEmulator::Bootstrap.bind_button(SKILL_INFO_WINDOW, CHILD_START_BUTTON + i) { |player, child, param|
-		player.state_set.set_bit_state(CHILD_INFO_VARBIT, child - CHILD_START_BUTTON)
-	}
+	bind :btn, :id => SKILL_INFO_WINDOW, :component => (CHILD_START_BUTTON + i) do
+		player.state_set.set_bit_state(CHILD_INFO_VARBIT, component - CHILD_START_BUTTON)
+	end
 end
 
 for i in (0...Skill::AMOUNT_SKILLS)
-	RuneEmulator::Bootstrap.bind_button(Interface::SKILLS, SKILL_BUTTONS[i]) { |player, child, param|
-		RuneEmulator::SkillMenu.open_window(player, SKILL_BUTTONS.key(child))
-	}
+	bind :btn, :id => Interface::SKILLS, :component => SKILL_BUTTONS[i] do
+		RuneEmulator::SkillMenu.open_window(player, SKILL_BUTTONS.key(component))
+	end
 end

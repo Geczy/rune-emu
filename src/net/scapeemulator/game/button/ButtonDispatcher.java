@@ -59,14 +59,17 @@ public final class ButtonDispatcher {
         /* Add the handler to the list */
         list.add(handler);
     }
-    
+
+    /**
+     * Unbinds all the handlers.
+     */
     public void unbindAll() {
         handlerLists.clear();
     }
 
-    public void handle(Player player, int hash, int param, ExtendedOption option) {
+    public void handle(Player player, int hash, int dyn, ExtendedOption option) {
 
-        logger.info("parent: " + (hash >> 16) + " " + ", child: " + (hash & 0xffff) + ", param: " + param + ", option: " + option);
+        logger.info("parent: " + Widget.getWidgetId(hash) + " " + ", child: " + Widget.getComponentId(hash) + ", dyn: " + dyn + ", option: " + option);
 
         /* Fetch the handler list for the specified hash */
         List<ButtonHandler> list = handlerLists.get(hash);
@@ -80,7 +83,7 @@ public final class ButtonDispatcher {
 
             /* If the handler option is equal to the option, handle it */
             if(handler.getOption() == option) {
-                handler.handle(player, param);
+                handler.handle(player, dyn);
             }
         }
     }

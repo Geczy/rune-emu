@@ -61,14 +61,14 @@ module RuneEmulator
   class Woodcutting
     class << self
       def bind_handlers
-        Bootstrap.bind_object_option(:one) { |player, object, option, context|
+        bind :obj do
           if option.eql?("chop down")
             if TREES.include?(object.position)
               player.start_action(WoodcuttingAction.new(player, TREES[object.position]))
-            context.stop
+              ctx.stop
             end
           end
-        }
+        end
       end
 
       def create_tree_types
@@ -103,7 +103,6 @@ module RuneEmulator
         OBJECT_LIST.fire_all_events(listener)
         OBJECT_LIST.add_listener(listener)
       end
-
     end
 
     class Tree
@@ -131,7 +130,7 @@ module RuneEmulator
 
       #TIMBERRRRR! Out of logs, turn into stump and schedule regrow task
       def timber
-        @object.id = @tree_type.stump_id
+        @object.id = (@object.id - 1276) + 1342
         TASK_SCHEDULER.schedule(RegrowTask.new(self))
       end
     end
@@ -219,7 +218,7 @@ module RuneEmulator
           @tree.chop_a_log
           if @tree.logs_left < 1
             @player.send_message("This tree has run out of logs.")
-            @player.play_animation(CANCEL_ANIMATION)
+            @player.cancel_animation
             stop
           return
           end

@@ -75,11 +75,7 @@ public final class ItemOnItemDispatcher {
                 itemTwo = tempItem;
             }
 
-            if(hashOne != hashTwo) {
-                handler.handle(player, inventoryOne, inventoryTwo, itemOne, itemTwo);
-            } else {
-                handler.handle(player, inventoryOne, itemOne, itemTwo);
-            }
+            handler.handle(player, inventoryOne, inventoryTwo, itemOne, itemTwo);
         }
     }
 

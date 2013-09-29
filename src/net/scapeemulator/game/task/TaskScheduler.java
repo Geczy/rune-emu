@@ -27,5 +27,4 @@ public final class TaskScheduler {
 			task.tick();
 		}
 	}
-
 }

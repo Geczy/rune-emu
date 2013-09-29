@@ -36,6 +36,27 @@ public final class Widget {
     public static int getHash(int parent, int child) {
         return parent << 16 | child;
     }
-    
+
+    /**
+     * Gets the widget id of a hash.
+     * @param hash The hash to use to get the id from.
+     * @return The widget id.
+     */
+    public static int getWidgetId(int hash) {
+        return hash >> 16;
+    }
+
+    /**
+     * Gets the component id of a hash.
+     * @param hash The hash to use to get the component id from.
+     * @return The component id.
+     */
+    public static int getComponentId(int hash) {
+        return hash & 0xFFFF;
+    }
+
+    /**
+     * Prevent construction;
+     */
     private Widget() {}
 }

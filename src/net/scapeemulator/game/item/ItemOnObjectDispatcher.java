@@ -71,7 +71,7 @@ public final class ItemOnObjectDispatcher {
         ItemOnObjectHandler handler = handlers.get(getHash(itemId, objectId));
 
         if(handler != null) {
-            handler.handle(player, object, item);
+            handler.handle(player, object, inventory, item);
         }
     }
     

@@ -51,7 +51,7 @@ module RuneEmulator
 			end
 
 			def bind_handlers()
-				Bootstrap.bind_object_option(:one) do |player, door, option, context|
+				bind :obj do
 					if option.eql?("open")
 						if DOORS.include?(door.position)
 							player.start_action(OpenDoorAction.new(player, door.position, DOORS[door.position], true))
@@ -60,7 +60,7 @@ module RuneEmulator
 					end
 				end
 
-				Bootstrap.bind_object_option(:one) do |player, door, option, context|
+				bind :obj do
 					if option.eql?("close")
 						if DOORS.include?(door.position)
 							player.start_action(OpenDoorAction.new(player, door.position, DOORS[door.position], false))

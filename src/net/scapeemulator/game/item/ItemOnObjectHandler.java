@@ -25,6 +25,7 @@ package net.scapeemulator.game.item;
 import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.SlottedItem;
+import net.scapeemulator.game.model.player.inventory.Inventory;
 
 /**
  * Created by Hadyn Richard
@@ -46,5 +47,5 @@ public abstract class ItemOnObjectHandler {
         return objectId;
     }
     
-    public abstract void handle(Player player, GroundObject object, SlottedItem item);
+    public abstract void handle(Player player, GroundObject object, Inventory inventory, SlottedItem item);
 }

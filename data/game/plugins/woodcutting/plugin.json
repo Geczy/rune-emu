@@ -1,4 +1,5 @@
 {
+	"authors" : [ "davidi2" ],
 	"scripts" : [ "woodcutting.rb" ],
 	"dependencies" : []
 }

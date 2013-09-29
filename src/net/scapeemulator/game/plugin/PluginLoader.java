@@ -118,9 +118,6 @@ public final class PluginLoader {
             PluginData pluginData = new PluginData();
             while(parser.nextToken() != JsonToken.END_OBJECT) {
                 String currentName = parser.getCurrentName();
-                if(currentName == null) {
-                    continue;
-                }
                 switch(currentName.toLowerCase()) {
                     case "scripts":
                         /* Check to see if the next token is valid */
@@ -141,6 +138,17 @@ public final class PluginLoader {
 
                         while(parser.nextToken() != JsonToken.END_ARRAY) {
                             pluginData.addDependency(parser.getText());
+                        }
+                        break;
+
+                    case "authors":
+                        /* Check to see if the next token is valid */
+                        if(parser.nextToken() != JsonToken.START_ARRAY) {
+                            throw new IOException();
+                        }
+
+                        while(parser.nextToken() != JsonToken.END_ARRAY) {
+                            /* La de la */
                         }
                         break;
                 }

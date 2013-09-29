@@ -47,6 +47,4 @@ public abstract class ItemOnItemHandler {
     }
    
     public abstract void handle(Player player, Inventory inventoryOne, Inventory inventoryTwo, SlottedItem itemOne, SlottedItem itemTwo);
-
-    public abstract void handle(Player player, Inventory inventory, SlottedItem itemOne, SlottedItem itemTwo);
 }
