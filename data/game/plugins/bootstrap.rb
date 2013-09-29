@@ -27,8 +27,8 @@ OPTION = { :one => Option::ONE, :two => Option::TWO, :three => Option::THREE, :f
 
 # The mapping of all the extended options and the respected symbol to access the option.
 EXTENDED_OPTION = { :one => ExtendedOption::ONE,  :two => ExtendedOption::TWO,  :three => ExtendedOption::THREE, :four => ExtendedOption::FOUR, 
-		            :five => ExtendedOption::FIVE, :six => ExtendedOption::SIX, :seven => ExtendedOption::SEVEN, :eight => ExtendedOption::EIGHT, 
-		            :nine => ExtendedOption::NINE }
+		                :five => ExtendedOption::FIVE, :six => ExtendedOption::SIX, :seven => ExtendedOption::SEVEN, :eight => ExtendedOption::EIGHT, 
+		                :nine => ExtendedOption::NINE }
 
 # The mapping of all the defined handler types.
 HANDLER_TYPES = {}
@@ -161,8 +161,8 @@ def create_handler(type, params, block)
 
 		# Define the target abstract method.
 		define_method(:handle, eval("-> #{type.dispatcher_params.join(', ')} do
-								    	context.new(@block, #{args[type.dispatcher_params]}#{extra[type.local_args]}).dispatch #{cond[type.name]}
-									end"))
+																	context.new(@block, #{args[type.dispatcher_params]}#{extra[type.local_args]}).dispatch #{cond[type.name]}
+																end"))
 	end
 
 	# Generate the flattened array of parameters that are in the correct order.
