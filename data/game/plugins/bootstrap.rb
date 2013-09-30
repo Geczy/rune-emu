@@ -272,9 +272,9 @@ define_handler_type(:item_on_obj) do
 
 	# Append each of the dispatcher params
 	self.dispatcher_params << :player
+	self.dispatcher_params << :obj
 	self.dispatcher_params << :inventory
 	self.dispatcher_params << :item
-	self.dispatcher_params << :obj
 
 	# Append each of the construction params
 	self.constructor_params << :item_id
