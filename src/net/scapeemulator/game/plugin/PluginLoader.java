@@ -119,6 +119,7 @@ public final class PluginLoader {
             PluginData pluginData = new PluginData();
             while(parser.nextToken() != JsonToken.END_OBJECT) {
                 String currentName = parser.getCurrentName();
+                if ( currentName == null ) continue;
                 switch(currentName.toLowerCase()) {
                     case "scripts":
                         /* Check to see if the next token is valid */
