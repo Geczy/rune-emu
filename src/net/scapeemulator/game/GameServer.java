@@ -6,36 +6,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import io.netty.util.internal.logging.Slf4JLoggerFactory;
-import net.scapeemulator.cache.Cache;
-import net.scapeemulator.cache.ChecksumTable;
-import net.scapeemulator.cache.FileStore;
-import net.scapeemulator.game.cache.MapLoader;
-import net.scapeemulator.game.io.DummyPlayerSerializer;
-import net.scapeemulator.game.io.JdbcPlayerSerializer;
-import net.scapeemulator.game.io.PlayerSerializer;
-import net.scapeemulator.game.model.definition.ItemDefinitions;
-import net.scapeemulator.game.model.definition.ObjectDefinitions;
-import net.scapeemulator.game.model.definition.VarbitDefinitions;
-import net.scapeemulator.game.model.definition.WidgetDefinitions;
-import net.scapeemulator.game.model.object.GroundObjectPopulator;
-import net.scapeemulator.game.model.pathfinding.MapDataListener;
-import net.scapeemulator.game.model.player.EquipmentDefinition;
-import net.scapeemulator.game.model.definition.NPCDefinitions;
-import net.scapeemulator.game.model.World;
-import net.scapeemulator.game.msg.CodecRepository;
-import net.scapeemulator.game.msg.MessageDispatcher;
-import net.scapeemulator.game.net.HttpChannelInitializer;
-import net.scapeemulator.game.net.RsChannelInitializer;
-import net.scapeemulator.game.net.login.LoginService;
-import net.scapeemulator.game.net.update.UpdateService;
-import net.scapeemulator.game.plugin.ScriptContext;
-import net.scapeemulator.game.plugin.PluginLoader;
-import net.scapeemulator.game.util.LandscapeKeyTable;
-import net.scapeemulator.util.NetworkConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.script.ScriptException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +16,38 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.script.ScriptException;
+
+import net.scapeemulator.cache.Cache;
+import net.scapeemulator.cache.ChecksumTable;
+import net.scapeemulator.cache.FileStore;
+import net.scapeemulator.game.cache.MapLoader;
+import net.scapeemulator.game.io.DummyPlayerSerializer;
+import net.scapeemulator.game.io.JdbcPlayerSerializer;
+import net.scapeemulator.game.io.PlayerSerializer;
+import net.scapeemulator.game.model.World;
+import net.scapeemulator.game.model.definition.ItemDefinitions;
+import net.scapeemulator.game.model.definition.NPCDefinitions;
+import net.scapeemulator.game.model.definition.ObjectDefinitions;
+import net.scapeemulator.game.model.definition.VarbitDefinitions;
+import net.scapeemulator.game.model.definition.WidgetDefinitions;
+import net.scapeemulator.game.model.object.GroundObjectPopulator;
+import net.scapeemulator.game.model.pathfinding.MapDataListener;
+import net.scapeemulator.game.model.player.EquipmentDefinition;
+import net.scapeemulator.game.msg.CodecRepository;
+import net.scapeemulator.game.msg.MessageDispatcher;
+import net.scapeemulator.game.net.HttpChannelInitializer;
+import net.scapeemulator.game.net.RsChannelInitializer;
+import net.scapeemulator.game.net.login.LoginService;
+import net.scapeemulator.game.net.update.UpdateService;
+import net.scapeemulator.game.plugin.PluginLoader;
+import net.scapeemulator.game.plugin.ScriptContext;
+import net.scapeemulator.game.util.LandscapeKeyTable;
+import net.scapeemulator.util.NetworkConstants;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public final class GameServer {

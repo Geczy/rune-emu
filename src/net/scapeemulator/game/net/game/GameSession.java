@@ -2,18 +2,19 @@ package net.scapeemulator.game.net.game;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import net.scapeemulator.game.GameServer;
-import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.model.Position;
-import net.scapeemulator.game.msg.Message;
-import net.scapeemulator.game.msg.MessageDispatcher;
-import net.scapeemulator.game.msg.impl.RegionChangeMessage;
-import net.scapeemulator.game.net.Session;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
+
+import net.scapeemulator.game.GameServer;
+import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.PlayerOption;
+import net.scapeemulator.game.msg.Message;
+import net.scapeemulator.game.msg.MessageDispatcher;
+import net.scapeemulator.game.msg.impl.RegionChangeMessage;
+import net.scapeemulator.game.net.Session;
 
 public final class GameSession extends Session {
 

@@ -22,17 +22,17 @@
 
 package net.scapeemulator.game.model.object;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.PlacementCoordsMessage;
 import net.scapeemulator.game.msg.impl.grounditem.GroundObjectRemoveMessage;
 import net.scapeemulator.game.msg.impl.grounditem.GroundObjectUpdateMessage;
-
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Hadyn Richard

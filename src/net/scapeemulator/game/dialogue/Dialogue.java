@@ -2,7 +2,7 @@ package net.scapeemulator.game.dialogue;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.scapeemulator.game.model.npc.NPC;
+
 import net.scapeemulator.game.model.player.InterfaceSet.Component;
 import net.scapeemulator.game.model.player.Player;
 

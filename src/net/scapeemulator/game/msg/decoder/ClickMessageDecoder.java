@@ -1,10 +1,14 @@
 package net.scapeemulator.game.msg.decoder;
 
+import java.io.IOException;
+
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.ClickMessage;
-import net.scapeemulator.game.net.game.*;
-
-import java.io.IOException;
+import net.scapeemulator.game.net.game.DataOrder;
+import net.scapeemulator.game.net.game.DataTransformation;
+import net.scapeemulator.game.net.game.DataType;
+import net.scapeemulator.game.net.game.GameFrame;
+import net.scapeemulator.game.net.game.GameFrameReader;
 
 public final class ClickMessageDecoder extends MessageDecoder<ClickMessage> {
 

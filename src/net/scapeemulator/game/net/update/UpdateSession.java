@@ -6,17 +6,19 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.handler.timeout.ReadTimeoutHandler;
+
+import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import net.scapeemulator.cache.Cache;
 import net.scapeemulator.cache.ChecksumTable;
 import net.scapeemulator.cache.Container;
 import net.scapeemulator.game.GameServer;
 import net.scapeemulator.game.net.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 public final class UpdateSession extends Session {
 

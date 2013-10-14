@@ -2,6 +2,7 @@ package net.scapeemulator.game.model.player;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import net.scapeemulator.game.model.Widget;
 import net.scapeemulator.game.msg.impl.inter.InterfaceAccessMessage;
 

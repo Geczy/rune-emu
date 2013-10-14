@@ -1,13 +1,13 @@
 package net.scapeemulator.cache;
 
-import net.scapeemulator.cache.util.crypto.Rsa;
-import net.scapeemulator.cache.util.crypto.Whirlpool;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+
+import net.scapeemulator.cache.util.crypto.Rsa;
+import net.scapeemulator.cache.util.crypto.Whirlpool;
 
 /**
  * A {@link ChecksumTable} stores checksums and versions of

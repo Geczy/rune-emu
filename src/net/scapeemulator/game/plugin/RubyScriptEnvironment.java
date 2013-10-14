@@ -22,9 +22,14 @@
 
 package net.scapeemulator.game.plugin;
 
-import javax.script.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.script.Compilable;
+import javax.script.CompiledScript;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 /**
  * Created by Hadyn Richard

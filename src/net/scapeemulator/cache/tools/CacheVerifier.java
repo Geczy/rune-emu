@@ -1,13 +1,13 @@
 package net.scapeemulator.cache.tools;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.zip.CRC32;
+
 import net.scapeemulator.cache.Container;
 import net.scapeemulator.cache.FileStore;
 import net.scapeemulator.cache.ReferenceTable;
 import net.scapeemulator.cache.ReferenceTable.Entry;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.zip.CRC32;
 
 public final class CacheVerifier {
 

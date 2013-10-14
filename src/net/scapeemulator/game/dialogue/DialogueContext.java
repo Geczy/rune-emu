@@ -1,13 +1,13 @@
 package net.scapeemulator.game.dialogue;
 
 import net.scapeemulator.game.model.definition.NPCDefinitions;
-import net.scapeemulator.game.model.mob.Mob;
 import net.scapeemulator.game.model.npc.NPC;
 import net.scapeemulator.game.model.player.InterfaceSet.Component;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.inter.InterfaceAnimationMessage;
 import net.scapeemulator.game.msg.impl.inter.InterfaceNPCHeadMessage;
 import net.scapeemulator.game.msg.impl.inter.InterfacePlayerHeadMessage;
+
 import org.codehaus.plexus.util.StringUtils;
 
 /**

@@ -1,11 +1,11 @@
 package net.scapeemulator.cache.util;
 
-import net.scapeemulator.cache.util.crypto.Whirlpool;
-
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
+
+import net.scapeemulator.cache.util.crypto.Whirlpool;
 
 /**
  * Contains {@link ByteBuffer}-related utility methods.

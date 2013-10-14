@@ -3,11 +3,12 @@ package net.scapeemulator.game.net.jaggrab;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.FileRegion;
+
+import java.io.IOException;
+
 import net.scapeemulator.game.GameServer;
 import net.scapeemulator.game.net.Session;
 import net.scapeemulator.game.net.file.FileProvider;
-
-import java.io.IOException;
 
 public final class JaggrabSession extends Session {
 

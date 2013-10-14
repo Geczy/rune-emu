@@ -1,12 +1,15 @@
 package net.scapeemulator.game.msg.decoder.item;
 
+import java.io.IOException;
+
 import net.scapeemulator.game.model.Option;
 import net.scapeemulator.game.msg.MessageDecoder;
-import net.scapeemulator.game.msg.impl.EquipItemMessage;
 import net.scapeemulator.game.msg.impl.item.ItemOptionMessage;
-import net.scapeemulator.game.net.game.*;
-
-import java.io.IOException;
+import net.scapeemulator.game.net.game.DataOrder;
+import net.scapeemulator.game.net.game.DataTransformation;
+import net.scapeemulator.game.net.game.DataType;
+import net.scapeemulator.game.net.game.GameFrame;
+import net.scapeemulator.game.net.game.GameFrameReader;
 
 public final class ItemOptionTwoMessageDecoder extends MessageDecoder<ItemOptionMessage> {
 

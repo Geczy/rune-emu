@@ -3,13 +3,15 @@ package net.scapeemulator.game.net.game;
 import io.netty.buffer.MessageBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
+
+import java.io.IOException;
+
 import net.scapeemulator.game.msg.CodecRepository;
 import net.scapeemulator.game.msg.Message;
 import net.scapeemulator.game.msg.MessageDecoder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public final class GameMessageDecoder extends MessageToMessageDecoder<GameFrame> {
 

@@ -1,9 +1,9 @@
 package net.scapeemulator.game.io.jdbc;
 
-import net.scapeemulator.game.model.player.Player;
-
 import java.io.IOException;
 import java.sql.SQLException;
+
+import net.scapeemulator.game.model.player.Player;
 
 public abstract class Table {
 

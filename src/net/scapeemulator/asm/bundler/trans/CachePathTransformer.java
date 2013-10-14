@@ -1,13 +1,14 @@
 package net.scapeemulator.asm.bundler.trans;
 
+import java.util.Iterator;
+import java.util.List;
+
 import net.scapeemulator.asm.util.InsnMatcher;
+
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodNode;
-
-import java.util.Iterator;
-import java.util.List;
 
 public final class CachePathTransformer extends Transformer {
 

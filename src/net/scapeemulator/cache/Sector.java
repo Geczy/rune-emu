@@ -1,8 +1,8 @@
 package net.scapeemulator.cache;
 
-import net.scapeemulator.cache.util.ByteBufferUtils;
-
 import java.nio.ByteBuffer;
+
+import net.scapeemulator.cache.util.ByteBufferUtils;
 
 /**
  * A {@link Sector} contains a header and data. The header contains information

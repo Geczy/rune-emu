@@ -1,9 +1,10 @@
 package net.scapeemulator.game.net;
 
 import io.netty.channel.Channel;
-import net.scapeemulator.game.GameServer;
 
 import java.io.IOException;
+
+import net.scapeemulator.game.GameServer;
 
 public abstract class Session {
 

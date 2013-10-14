@@ -1,14 +1,15 @@
 package net.scapeemulator.game.io.jdbc;
 
-import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.model.Position;
-import org.mindrot.jbcrypt.BCrypt;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.player.Player;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 public final class PlayersTable extends Table {
 

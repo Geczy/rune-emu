@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import net.scapeemulator.game.model.Option;
 import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.model.definition.NPCDefinitions;

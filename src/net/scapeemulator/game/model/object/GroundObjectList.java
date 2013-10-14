@@ -22,13 +22,18 @@
 
 package net.scapeemulator.game.model.object;
 
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import net.scapeemulator.cache.def.ObjectDefinition;
 import net.scapeemulator.game.model.Entity;
 import net.scapeemulator.game.model.Position;
-
-import java.util.Map.Entry;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import net.scapeemulator.cache.def.ObjectDefinition;
 import net.scapeemulator.game.model.definition.ObjectDefinitions;
 
 /**

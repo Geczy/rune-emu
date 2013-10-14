@@ -1,5 +1,9 @@
 package net.scapeemulator.game.tools;
 
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import net.scapeemulator.cache.Cache;
 import net.scapeemulator.cache.FileStore;
 import net.scapeemulator.cache.def.ItemDefinition;
@@ -7,12 +11,9 @@ import net.scapeemulator.game.model.definition.ItemDefinitions;
 import net.scapeemulator.game.model.player.Equipment;
 import net.scapeemulator.game.model.player.EquipmentDefinition;
 import net.scapeemulator.game.model.player.EquipmentDefinition.WeaponClass;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public final class EquipmentDumper {
 

@@ -1,9 +1,9 @@
 package net.scapeemulator.game.command;
 
-import net.scapeemulator.game.model.player.Player;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.scapeemulator.game.model.player.Player;
 
 public final class CommandDispatcher {
 

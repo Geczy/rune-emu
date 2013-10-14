@@ -22,11 +22,11 @@
 
 package net.scapeemulator.game.model.pathfinding;
 
-import net.scapeemulator.game.model.Position;
-import net.scapeemulator.game.model.World;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.World;
 
 /**
  * @author Graham Edgecombe

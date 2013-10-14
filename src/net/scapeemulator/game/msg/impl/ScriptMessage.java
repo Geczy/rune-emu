@@ -1,6 +1,7 @@
 package net.scapeemulator.game.msg.impl;
 
 import java.util.Arrays;
+
 import net.scapeemulator.game.msg.Message;
 
 public final class ScriptMessage extends Message {

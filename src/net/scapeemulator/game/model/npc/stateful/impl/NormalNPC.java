@@ -22,12 +22,14 @@
 
 package net.scapeemulator.game.model.npc.stateful.impl;
 
-import static net.scapeemulator.game.model.npc.stateful.impl.NormalNPC.State.*;
-import net.scapeemulator.game.model.npc.stateful.impl.NormalNPC.State;
-import net.scapeemulator.game.model.npc.stateful.StatefulNPC;
-import net.scapeemulator.game.model.npc.stateful.handler.RandomWalkStateHandler;
+import static net.scapeemulator.game.model.npc.stateful.impl.NormalNPC.State.NONE;
+import static net.scapeemulator.game.model.npc.stateful.impl.NormalNPC.State.WALK_RANDOMLY;
 
 import java.util.Random;
+
+import net.scapeemulator.game.model.npc.stateful.StatefulNPC;
+import net.scapeemulator.game.model.npc.stateful.handler.RandomWalkStateHandler;
+import net.scapeemulator.game.model.npc.stateful.impl.NormalNPC.State;
 
 /**
  * Created by Hadyn Richard

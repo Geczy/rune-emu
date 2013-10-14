@@ -1,13 +1,13 @@
 package net.scapeemulator.cache;
 
-import net.scapeemulator.cache.util.ByteBufferUtils;
-import net.scapeemulator.cache.util.crypto.Whirlpool;
-
 import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.zip.CRC32;
+
+import net.scapeemulator.cache.util.ByteBufferUtils;
+import net.scapeemulator.cache.util.crypto.Whirlpool;
 
 /**
  * The {@link Cache} class provides a unified, high-level API for modifying

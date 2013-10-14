@@ -22,9 +22,30 @@
 
 package net.scapeemulator.game.model.pathfinding;
 
-import static net.scapeemulator.game.model.pathfinding.Tile.*;
-import static net.scapeemulator.game.model.object.ObjectOrientation.*;
-
+import static net.scapeemulator.game.model.object.ObjectOrientation.EAST;
+import static net.scapeemulator.game.model.object.ObjectOrientation.NORTH;
+import static net.scapeemulator.game.model.object.ObjectOrientation.SOUTH;
+import static net.scapeemulator.game.model.object.ObjectOrientation.WEST;
+import static net.scapeemulator.game.model.pathfinding.Tile.BLOCKED;
+import static net.scapeemulator.game.model.pathfinding.Tile.BRIDGE;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_OCCUPANT;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_EAST;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_NORTH;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_NORTH_EAST;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_NORTH_WEST;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_SOUTH;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_SOUTH_EAST;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_SOUTH_WEST;
+import static net.scapeemulator.game.model.pathfinding.Tile.IMPENETRABLE_WALL_WEST;
+import static net.scapeemulator.game.model.pathfinding.Tile.OCCUPANT;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_EAST;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_NORTH;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_NORTH_EAST;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_NORTH_WEST;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_SOUTH;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_SOUTH_EAST;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_SOUTH_WEST;
+import static net.scapeemulator.game.model.pathfinding.Tile.WALL_WEST;
 import net.scapeemulator.game.model.object.ObjectType;
 
 /**

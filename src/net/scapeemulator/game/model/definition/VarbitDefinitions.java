@@ -22,16 +22,16 @@
 
 package net.scapeemulator.game.model.definition;
 
+import java.io.IOException;
+
 import net.scapeemulator.cache.Archive;
 import net.scapeemulator.cache.Cache;
 import net.scapeemulator.cache.Container;
 import net.scapeemulator.cache.ReferenceTable;
-import net.scapeemulator.cache.def.ObjectDefinition;
 import net.scapeemulator.cache.def.VarbitDefinition;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 /**
  * Created by Hadyn Richard

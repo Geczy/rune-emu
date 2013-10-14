@@ -4,13 +4,14 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.MessageBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+
+import java.io.IOException;
+import java.util.GregorianCalendar;
+
 import net.scapeemulator.game.net.handshake.HandshakeMessage;
 import net.scapeemulator.util.Base37Utils;
 import net.scapeemulator.util.ByteBufUtils;
 import net.scapeemulator.util.crypto.RsaKeySet;
-
-import java.io.IOException;
-import java.util.GregorianCalendar;
 
 public final class RegisterDecoder extends ByteToMessageDecoder {
 

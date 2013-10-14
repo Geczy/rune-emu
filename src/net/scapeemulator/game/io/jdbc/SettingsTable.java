@@ -1,13 +1,13 @@
 package net.scapeemulator.game.io.jdbc;
 
-import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.model.player.PlayerSettings;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import net.scapeemulator.game.model.player.Player;
+import net.scapeemulator.game.model.player.PlayerSettings;
 
 public final class SettingsTable extends Table {
 

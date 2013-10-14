@@ -1,9 +1,9 @@
 package net.scapeemulator.game.model.player.inventory;
 
-import net.scapeemulator.game.model.player.Item;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import net.scapeemulator.game.model.player.Item;
 
 public final class Inventory {
 

@@ -1,7 +1,9 @@
 package net.scapeemulator.game.msg.encoder;
 
 import io.netty.buffer.ByteBufAllocator;
+
 import java.io.IOException;
+
 import net.scapeemulator.game.model.Widget;
 import net.scapeemulator.game.msg.MessageEncoder;
 import net.scapeemulator.game.msg.impl.inter.InterfacePlayerHeadMessage;

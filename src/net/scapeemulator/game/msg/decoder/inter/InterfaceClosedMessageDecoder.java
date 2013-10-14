@@ -1,10 +1,10 @@
 package net.scapeemulator.game.msg.decoder.inter;
 
+import java.io.IOException;
+
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.inter.InterfaceClosedMessage;
 import net.scapeemulator.game.net.game.GameFrame;
-
-import java.io.IOException;
 
 public final class InterfaceClosedMessageDecoder extends MessageDecoder<InterfaceClosedMessage> {
 

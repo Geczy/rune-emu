@@ -22,7 +22,6 @@
 
 package net.scapeemulator.game.model;
 
-import net.scapeemulator.game.model.mob.Mob;
 
 /**
  * Created by Hadyn Richard

@@ -3,6 +3,7 @@ package net.scapeemulator.game.model.mob.action;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
+
 import net.scapeemulator.game.model.Area;
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.area.QuadArea;

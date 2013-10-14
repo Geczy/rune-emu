@@ -1,6 +1,7 @@
 package net.scapeemulator.game.model;
 
 import net.scapeemulator.game.model.grounditem.GroundItemList;
+import net.scapeemulator.game.model.grounditem.GroundItemList.Type;
 import net.scapeemulator.game.model.npc.NPC;
 import net.scapeemulator.game.model.object.GroundObjectList;
 import net.scapeemulator.game.model.pathfinding.ObjectDataListener;
@@ -9,7 +10,6 @@ import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.net.game.GameSession;
 import net.scapeemulator.game.task.TaskScheduler;
 import net.scapeemulator.game.update.PlayerUpdater;
-import net.scapeemulator.game.model.grounditem.GroundItemList.Type;
 
 public final class World {
 

@@ -22,10 +22,10 @@
 
 package net.scapeemulator.game.model.pathfinding;
 
-import net.scapeemulator.game.model.Position;
-
 import java.util.Deque;
 import java.util.LinkedList;
+
+import net.scapeemulator.game.model.Position;
 
 /**
  * Created by Graham

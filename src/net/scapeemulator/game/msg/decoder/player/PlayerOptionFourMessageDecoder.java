@@ -1,6 +1,7 @@
 package net.scapeemulator.game.msg.decoder.player;
 
 import java.io.IOException;
+
 import net.scapeemulator.game.model.ExtendedOption;
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.player.PlayerOptionMessage;

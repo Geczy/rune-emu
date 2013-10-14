@@ -1,6 +1,7 @@
 package net.scapeemulator.game.msg.decoder.npc;
 
 import java.io.IOException;
+
 import net.scapeemulator.game.model.Option;
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.npc.NPCOptionMessage;

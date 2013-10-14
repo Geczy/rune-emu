@@ -1,11 +1,11 @@
 package net.scapeemulator.cache.tools;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import net.scapeemulator.cache.Container;
 import net.scapeemulator.cache.FileStore;
 import net.scapeemulator.cache.ReferenceTable;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
 
 public final class CacheDefragmenter {
 

@@ -1,7 +1,5 @@
 package net.scapeemulator.cache;
 
-import net.scapeemulator.cache.util.StringUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import net.scapeemulator.cache.util.StringUtils;
 
 /**
  * A {@link ReferenceTable} holds details for all the files with a single

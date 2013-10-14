@@ -1,9 +1,9 @@
 package net.scapeemulator.game.model;
 
-import net.scapeemulator.game.model.mob.Mob;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import net.scapeemulator.game.model.mob.Mob;
 
 public final class MobList<T extends Mob> implements Iterable<T> {
 

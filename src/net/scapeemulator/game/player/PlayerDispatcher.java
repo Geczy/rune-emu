@@ -2,6 +2,7 @@ package net.scapeemulator.game.player;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import net.scapeemulator.game.model.ExtendedOption;
 import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.model.player.Player;

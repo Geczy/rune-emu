@@ -1,10 +1,10 @@
 package net.scapeemulator.cache.def;
 
-import net.scapeemulator.cache.util.ByteBufferUtils;
-
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.scapeemulator.cache.util.ByteBufferUtils;
 
 public final class ClientScript {
 

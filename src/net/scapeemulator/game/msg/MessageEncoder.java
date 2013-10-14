@@ -1,10 +1,10 @@
 package net.scapeemulator.game.msg;
 
 import io.netty.buffer.ByteBufAllocator;
-import net.scapeemulator.game.msg.Message;
-import net.scapeemulator.game.net.game.GameFrame;
 
 import java.io.IOException;
+
+import net.scapeemulator.game.net.game.GameFrame;
 
 public abstract class MessageEncoder<T extends Message> {
 

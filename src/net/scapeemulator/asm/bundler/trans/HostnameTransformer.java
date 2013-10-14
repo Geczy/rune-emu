@@ -1,11 +1,16 @@
 package net.scapeemulator.asm.bundler.trans;
 
-import net.scapeemulator.asm.util.InsnMatcher;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.*;
-
 import java.util.Iterator;
 import java.util.List;
+
+import net.scapeemulator.asm.util.InsnMatcher;
+
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.InsnNode;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.MethodNode;
 
 public final class HostnameTransformer extends Transformer {
 

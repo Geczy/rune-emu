@@ -1,6 +1,5 @@
 package net.scapeemulator.game.model.player;
 
-import net.scapeemulator.game.model.player.Item;
 
 public final class SlottedItem {
 

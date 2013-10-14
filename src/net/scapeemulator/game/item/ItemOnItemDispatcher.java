@@ -22,12 +22,12 @@
 
 package net.scapeemulator.game.item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.SlottedItem;
 import net.scapeemulator.game.model.player.inventory.Inventory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Hadyn Richard

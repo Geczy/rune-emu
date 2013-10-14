@@ -22,6 +22,9 @@
 
 package net.scapeemulator.game.item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.model.object.GroundObjectList;
@@ -29,9 +32,6 @@ import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.SlottedItem;
 import net.scapeemulator.game.model.player.inventory.Inventory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Hadyn Richard

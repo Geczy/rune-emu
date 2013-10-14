@@ -22,10 +22,10 @@
 
 package net.scapeemulator.game.model.npc.stateful;
 
-import net.scapeemulator.game.model.npc.NPC;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.scapeemulator.game.model.npc.NPC;
 
 /**
  * Created by Hadyn Richard

@@ -22,16 +22,16 @@
 
 package net.scapeemulator.game.item;
 
-import net.scapeemulator.game.model.definition.ItemDefinitions;
-import net.scapeemulator.game.model.Option;
-import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.model.player.SlottedItem;
-import net.scapeemulator.game.model.player.inventory.Inventory;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import net.scapeemulator.game.model.Option;
+import net.scapeemulator.game.model.definition.ItemDefinitions;
+import net.scapeemulator.game.model.player.Player;
+import net.scapeemulator.game.model.player.SlottedItem;
+import net.scapeemulator.game.model.player.inventory.Inventory;
 import net.scapeemulator.game.util.HandlerContext;
 
 /**

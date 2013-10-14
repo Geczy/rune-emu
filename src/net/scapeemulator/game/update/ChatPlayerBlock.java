@@ -1,5 +1,7 @@
 package net.scapeemulator.game.update;
 
+import java.util.Arrays;
+
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.ChatMessage;
 import net.scapeemulator.game.msg.impl.PlayerUpdateMessage;
@@ -7,8 +9,6 @@ import net.scapeemulator.game.net.game.DataOrder;
 import net.scapeemulator.game.net.game.DataType;
 import net.scapeemulator.game.net.game.GameFrameBuilder;
 import net.scapeemulator.util.ChatUtils;
-
-import java.util.Arrays;
 
 public final class ChatPlayerBlock extends PlayerBlock {
 

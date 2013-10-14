@@ -5,6 +5,10 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelPipeline;
 import io.netty.handler.timeout.ReadTimeoutHandler;
+
+import java.io.IOException;
+import java.security.SecureRandom;
+
 import net.burtleburtle.bob.rand.IsaacRandom;
 import net.scapeemulator.cache.ChecksumTable;
 import net.scapeemulator.game.GameServer;
@@ -12,10 +16,11 @@ import net.scapeemulator.game.model.player.InterfaceSet.DisplayMode;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.net.RsChannelHandler;
 import net.scapeemulator.game.net.Session;
-import net.scapeemulator.game.net.game.*;
-
-import java.io.IOException;
-import java.security.SecureRandom;
+import net.scapeemulator.game.net.game.GameFrameDecoder;
+import net.scapeemulator.game.net.game.GameFrameEncoder;
+import net.scapeemulator.game.net.game.GameMessageDecoder;
+import net.scapeemulator.game.net.game.GameMessageEncoder;
+import net.scapeemulator.game.net.game.GameSession;
 
 public final class LoginSession extends Session {
 

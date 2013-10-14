@@ -1,6 +1,7 @@
 package net.scapeemulator.game.msg.decoder.inter;
 
 import java.io.IOException;
+
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.inter.InterfaceInputMessage;
 import net.scapeemulator.game.net.game.DataOrder;

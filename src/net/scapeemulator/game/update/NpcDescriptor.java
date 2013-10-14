@@ -1,14 +1,14 @@
 package net.scapeemulator.game.update;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.scapeemulator.game.model.mob.Direction;
 import net.scapeemulator.game.model.npc.NPC;
 import net.scapeemulator.game.msg.impl.NpcUpdateMessage;
 import net.scapeemulator.game.net.game.DataOrder;
 import net.scapeemulator.game.net.game.DataType;
 import net.scapeemulator.game.net.game.GameFrameBuilder;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class NpcDescriptor {
 

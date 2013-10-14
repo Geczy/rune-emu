@@ -1,8 +1,8 @@
 package net.scapeemulator.game.update;
 
+import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.mob.Direction;
 import net.scapeemulator.game.model.npc.NPC;
-import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.msg.impl.NpcUpdateMessage;
 import net.scapeemulator.game.net.game.GameFrameBuilder;
 

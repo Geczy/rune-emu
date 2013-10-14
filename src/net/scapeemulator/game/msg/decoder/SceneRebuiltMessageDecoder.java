@@ -22,11 +22,11 @@
 
 package net.scapeemulator.game.msg.decoder;
 
+import java.io.IOException;
+
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.SceneRebuiltMessage;
 import net.scapeemulator.game.net.game.GameFrame;
-
-import java.io.IOException;
 
 /**
  * Created by Hadyn Richard

@@ -1,6 +1,11 @@
 package net.scapeemulator.game.update;
 
-import net.scapeemulator.game.model.player.*;
+import net.scapeemulator.game.model.player.Appearance;
+import net.scapeemulator.game.model.player.Equipment;
+import net.scapeemulator.game.model.player.EquipmentDefinition;
+import net.scapeemulator.game.model.player.Gender;
+import net.scapeemulator.game.model.player.Item;
+import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.inventory.Inventory;
 import net.scapeemulator.game.msg.impl.PlayerUpdateMessage;
 import net.scapeemulator.game.net.game.DataTransformation;

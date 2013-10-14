@@ -2,7 +2,6 @@ package net.scapeemulator.game.task;
 
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.mob.Mob;
-import net.scapeemulator.game.task.Action;
 
 /**
  * An @{link Action} which fires when a distance requirement is met.

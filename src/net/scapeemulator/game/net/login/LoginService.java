@@ -1,15 +1,15 @@
 package net.scapeemulator.game.net.login;
 
-import net.scapeemulator.game.io.PlayerSerializer;
-import net.scapeemulator.game.io.PlayerSerializer.SerializeResult;
-import net.scapeemulator.game.model.MobList;
-import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.model.World;
-
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+
+import net.scapeemulator.game.io.PlayerSerializer;
+import net.scapeemulator.game.io.PlayerSerializer.SerializeResult;
+import net.scapeemulator.game.model.MobList;
+import net.scapeemulator.game.model.World;
+import net.scapeemulator.game.model.player.Player;
 
 public final class LoginService implements Runnable {
 

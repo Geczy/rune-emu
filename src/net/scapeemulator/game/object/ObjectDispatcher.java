@@ -22,15 +22,17 @@
 
 package net.scapeemulator.game.object;
 
-import net.scapeemulator.game.model.*;
-import net.scapeemulator.game.model.definition.ObjectDefinitions;
-import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
-import net.scapeemulator.game.model.player.Player;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import net.scapeemulator.game.model.Option;
+import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.World;
+import net.scapeemulator.game.model.definition.ObjectDefinitions;
+import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
+import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.util.HandlerContext;
 
 /**

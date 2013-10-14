@@ -1,10 +1,10 @@
 package net.scapeemulator.game.model.mob;
 
-import net.scapeemulator.game.model.Position;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
+
+import net.scapeemulator.game.model.Position;
 
 public final class WalkingQueue {
     

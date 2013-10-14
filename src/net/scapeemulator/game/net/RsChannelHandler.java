@@ -2,6 +2,9 @@ package net.scapeemulator.game.net;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundMessageHandlerAdapter;
+
+import java.io.IOException;
+
 import net.scapeemulator.game.GameServer;
 import net.scapeemulator.game.net.auto.AutoLoginSession;
 import net.scapeemulator.game.net.handshake.HandshakeMessage;
@@ -10,10 +13,9 @@ import net.scapeemulator.game.net.login.LoginSession;
 import net.scapeemulator.game.net.register.RegisterSession;
 import net.scapeemulator.game.net.update.UpdateSession;
 import net.scapeemulator.game.net.world.WorldListSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public final class RsChannelHandler extends ChannelInboundMessageHandlerAdapter<Object> { /* TODO: more specific generics here? */
 

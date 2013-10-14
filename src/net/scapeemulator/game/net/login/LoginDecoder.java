@@ -4,11 +4,12 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.MessageBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+
+import java.io.IOException;
+
 import net.scapeemulator.util.Base37Utils;
 import net.scapeemulator.util.ByteBufUtils;
 import net.scapeemulator.util.crypto.RsaKeySet;
-
-import java.io.IOException;
 
 public final class LoginDecoder extends ByteToMessageDecoder {
 

@@ -24,7 +24,6 @@ package net.scapeemulator.game.model.pathfinding;
 
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.mob.Mob;
-import net.scapeemulator.game.model.player.Player;
 
 /**
  * Created by Hadyn Richard

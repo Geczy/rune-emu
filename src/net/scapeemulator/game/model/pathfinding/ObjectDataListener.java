@@ -23,8 +23,8 @@
 package net.scapeemulator.game.model.pathfinding;
 
 import net.scapeemulator.cache.def.ObjectDefinition;
-import net.scapeemulator.game.model.definition.ObjectDefinitions;
 import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.definition.ObjectDefinitions;
 import net.scapeemulator.game.model.object.GroundObjectList.GroundObject;
 import net.scapeemulator.game.model.object.GroundObjectListenerAdapter;
 

@@ -1,12 +1,12 @@
 package net.scapeemulator.game.msg.decoder;
 
+import java.io.IOException;
+
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.FocusMessage;
 import net.scapeemulator.game.net.game.DataType;
 import net.scapeemulator.game.net.game.GameFrame;
 import net.scapeemulator.game.net.game.GameFrameReader;
-
-import java.io.IOException;
 
 public final class FocusMessageDecoder extends MessageDecoder<FocusMessage> {
 

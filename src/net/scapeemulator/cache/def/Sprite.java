@@ -1,7 +1,5 @@
 package net.scapeemulator.cache.def;
 
-import net.scapeemulator.cache.util.ByteBufferUtils;
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -9,6 +7,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.scapeemulator.cache.util.ByteBufferUtils;
 
 /**
  * Represents a {@link Sprite} which may contain one or more frames.

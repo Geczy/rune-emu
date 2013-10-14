@@ -2,17 +2,17 @@ package net.scapeemulator.cache.tools;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.scapeemulator.cache.Cache;
 import net.scapeemulator.cache.Container;
 import net.scapeemulator.cache.FileStore;
 import net.scapeemulator.cache.ReferenceTable;
 import net.scapeemulator.cache.ReferenceTable.Entry;
 import net.scapeemulator.cache.def.ClientScript;
-
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.Map;
 
 public final class ClientScriptDumper {
 

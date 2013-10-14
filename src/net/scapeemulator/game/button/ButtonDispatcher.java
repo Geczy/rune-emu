@@ -22,16 +22,17 @@
 
 package net.scapeemulator.game.button;
 
-import net.scapeemulator.game.model.ExtendedOption;
-import net.scapeemulator.game.model.Widget;
-import net.scapeemulator.game.model.player.Player;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import net.scapeemulator.game.model.ExtendedOption;
+import net.scapeemulator.game.model.Widget;
+import net.scapeemulator.game.model.player.Player;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Hadyn Richard

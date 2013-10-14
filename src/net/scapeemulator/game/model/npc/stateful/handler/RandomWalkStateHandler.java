@@ -22,13 +22,17 @@
 
 package net.scapeemulator.game.model.npc.stateful.handler;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import net.scapeemulator.game.model.Area;
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.mob.Direction;
 import net.scapeemulator.game.model.npc.NPC;
 import net.scapeemulator.game.model.npc.stateful.StateHandler;
-
-import java.util.*;
 
 /**
  * Created by Hadyn Richard

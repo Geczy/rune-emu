@@ -1,7 +1,5 @@
 package net.scapeemulator.cache;
 
-import net.scapeemulator.cache.util.FileChannelUtils;
-
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +9,8 @@ import java.nio.channels.FileChannel;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.scapeemulator.cache.util.FileChannelUtils;
 
 /**
  * A file store holds multiple files inside a "virtual" file system made up of

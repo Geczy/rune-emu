@@ -25,8 +25,8 @@ package net.scapeemulator.game.model.pathfinding;
 import net.scapeemulator.cache.def.ObjectDefinition;
 import net.scapeemulator.game.cache.MapListenerAdapter;
 import net.scapeemulator.game.cache.MapLoader;
-import net.scapeemulator.game.model.definition.ObjectDefinitions;
 import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.definition.ObjectDefinitions;
 import net.scapeemulator.game.model.object.ObjectType;
 
 /**

@@ -1,5 +1,13 @@
 package net.scapeemulator.game.io;
 
+import java.io.Closeable;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import net.scapeemulator.game.io.jdbc.ItemsTable;
 import net.scapeemulator.game.io.jdbc.PlayersTable;
 import net.scapeemulator.game.io.jdbc.SettingsTable;
@@ -7,13 +15,10 @@ import net.scapeemulator.game.io.jdbc.Table;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.inventory.Inventory;
 import net.scapeemulator.game.net.login.LoginResponse;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.Closeable;
-import java.io.IOException;
-import java.sql.*;
 
 public final class JdbcPlayerSerializer extends PlayerSerializer implements Closeable {
 

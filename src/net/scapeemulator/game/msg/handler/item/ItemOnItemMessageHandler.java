@@ -24,7 +24,6 @@ package net.scapeemulator.game.msg.handler.item;
 
 import net.scapeemulator.game.item.ItemOnItemDispatcher;
 import net.scapeemulator.game.model.player.Player;
-import net.scapeemulator.game.msg.Message;
 import net.scapeemulator.game.msg.MessageHandler;
 import net.scapeemulator.game.msg.impl.item.ItemOnItemMessage;
 

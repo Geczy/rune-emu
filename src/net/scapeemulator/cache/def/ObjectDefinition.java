@@ -22,9 +22,9 @@
 
 package net.scapeemulator.cache.def;
 
-import net.scapeemulator.cache.util.ByteBufferUtils;
-
 import java.nio.ByteBuffer;
+
+import net.scapeemulator.cache.util.ByteBufferUtils;
 
 /**
  * Created by Hadyn Richard

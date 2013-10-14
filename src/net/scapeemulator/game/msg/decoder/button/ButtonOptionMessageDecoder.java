@@ -22,14 +22,14 @@
 
 package net.scapeemulator.game.msg.decoder.button;
 
+import java.io.IOException;
+
 import net.scapeemulator.game.model.ExtendedOption;
 import net.scapeemulator.game.msg.MessageDecoder;
 import net.scapeemulator.game.msg.impl.button.ButtonOptionMessage;
 import net.scapeemulator.game.net.game.DataType;
 import net.scapeemulator.game.net.game.GameFrame;
 import net.scapeemulator.game.net.game.GameFrameReader;
-
-import java.io.IOException;
 
 /**
  * Created by Hadyn Richard

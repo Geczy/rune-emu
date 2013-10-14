@@ -22,13 +22,13 @@
 
 package net.scapeemulator.game.model.player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.scapeemulator.game.model.player.inventory.Inventory;
 import net.scapeemulator.game.model.player.inventory.InventoryAppearanceListener;
 import net.scapeemulator.game.model.player.inventory.InventoryFullListener;
 import net.scapeemulator.game.model.player.inventory.InventoryMessageListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Hadyn Richard

@@ -22,18 +22,23 @@
 
 package net.scapeemulator.game.plugin;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.scapeemulator.game.button.ButtonDispatcher;
 import net.scapeemulator.game.button.ButtonHandler;
 import net.scapeemulator.game.command.CommandDispatcher;
 import net.scapeemulator.game.command.CommandHandler;
-import net.scapeemulator.game.item.*;
-import net.scapeemulator.game.object.ObjectDispatcher;
-import net.scapeemulator.game.object.ObjectHandler;
-
-import java.util.LinkedList;
-import java.util.List;
+import net.scapeemulator.game.item.ItemDispatcher;
+import net.scapeemulator.game.item.ItemHandler;
+import net.scapeemulator.game.item.ItemOnItemDispatcher;
+import net.scapeemulator.game.item.ItemOnItemHandler;
+import net.scapeemulator.game.item.ItemOnObjectDispatcher;
+import net.scapeemulator.game.item.ItemOnObjectHandler;
 import net.scapeemulator.game.npc.NPCDispatcher;
 import net.scapeemulator.game.npc.NPCHandler;
+import net.scapeemulator.game.object.ObjectDispatcher;
+import net.scapeemulator.game.object.ObjectHandler;
 import net.scapeemulator.game.player.PlayerDispatcher;
 import net.scapeemulator.game.player.PlayerHandler;
 

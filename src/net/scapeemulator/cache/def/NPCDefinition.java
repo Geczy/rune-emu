@@ -1,6 +1,7 @@
 package net.scapeemulator.cache.def;
 
 import java.nio.ByteBuffer;
+
 import net.scapeemulator.cache.util.ByteBufferUtils;
 
 /**

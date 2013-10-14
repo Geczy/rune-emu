@@ -7,6 +7,10 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
 import net.scapeemulator.game.net.auto.AutoLoginDecoder;
 import net.scapeemulator.game.net.jaggrab.JaggrabDecoder;
 import net.scapeemulator.game.net.login.LoginDecoder;
@@ -19,9 +23,6 @@ import net.scapeemulator.game.net.update.UpdateStatusMessageEncoder;
 import net.scapeemulator.game.net.update.XorEncoder;
 import net.scapeemulator.game.net.world.WorldListDecoder;
 import net.scapeemulator.game.net.world.WorldListEncoder;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public final class HandshakeDecoder extends ChannelInboundByteHandlerAdapter {
 

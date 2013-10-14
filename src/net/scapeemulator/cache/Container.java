@@ -1,10 +1,10 @@
 package net.scapeemulator.cache;
 
-import net.scapeemulator.cache.util.CompressionUtils;
-import net.scapeemulator.cache.util.crypto.Xtea;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
+
+import net.scapeemulator.cache.util.CompressionUtils;
+import net.scapeemulator.cache.util.crypto.Xtea;
 
 /**
  * A {@link Container} holds an optionally compressed file. This class can be

@@ -3,11 +3,12 @@ package net.scapeemulator.game.net.auto;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
+
+import java.io.IOException;
+
 import net.scapeemulator.game.GameServer;
 import net.scapeemulator.game.net.Session;
 import net.scapeemulator.game.net.login.LoginResponse;
-
-import java.io.IOException;
 
 public final class AutoLoginSession extends Session {
 

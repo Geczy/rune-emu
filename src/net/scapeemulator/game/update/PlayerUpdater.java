@@ -1,17 +1,17 @@
 package net.scapeemulator.game.update;
 
-import net.scapeemulator.game.model.npc.NPC;
-import net.scapeemulator.game.model.player.Player;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.World;
+import net.scapeemulator.game.model.npc.NPC;
+import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.msg.impl.NpcUpdateMessage;
 import net.scapeemulator.game.msg.impl.PlayerUpdateMessage;
 import net.scapeemulator.game.msg.impl.RegionChangeMessage;
 import net.scapeemulator.game.msg.impl.ResetMinimapFlagMessage;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public final class PlayerUpdater {
 

@@ -1,8 +1,8 @@
 package net.scapeemulator.cache.def;
 
-import net.scapeemulator.cache.util.ByteBufferUtils;
-
 import java.nio.ByteBuffer;
+
+import net.scapeemulator.cache.util.ByteBufferUtils;
 
 /**
  * A class that loads item/model information from the cache.

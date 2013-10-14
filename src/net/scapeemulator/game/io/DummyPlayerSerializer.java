@@ -1,7 +1,7 @@
 package net.scapeemulator.game.io;
 
-import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.net.login.LoginResponse;
 
 public final class DummyPlayerSerializer extends PlayerSerializer {

@@ -2,25 +2,27 @@ package net.scapeemulator.game.model.player;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import net.scapeemulator.game.model.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.scapeemulator.game.model.Position;
+import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.model.grounditem.GroundItemList;
+import net.scapeemulator.game.model.grounditem.GroundItemList.Type;
 import net.scapeemulator.game.model.grounditem.GroundItemSynchronizer;
 import net.scapeemulator.game.model.mob.Mob;
 import net.scapeemulator.game.model.npc.NPC;
 import net.scapeemulator.game.model.object.GroundObjectSynchronizer;
 import net.scapeemulator.game.model.player.inventory.Inventory;
-import net.scapeemulator.game.msg.*;
+import net.scapeemulator.game.msg.Message;
 import net.scapeemulator.game.msg.impl.ChatMessage;
 import net.scapeemulator.game.msg.impl.EnergyMessage;
 import net.scapeemulator.game.msg.impl.LogoutMessage;
-import net.scapeemulator.game.msg.impl.ServerMessage;
-import net.scapeemulator.game.net.game.GameSession;
-import net.scapeemulator.game.model.grounditem.GroundItemList.Type;
-
-import java.util.ArrayList;
-import java.util.List;
 import net.scapeemulator.game.msg.impl.PlayerMenuOptionMessage;
+import net.scapeemulator.game.msg.impl.ServerMessage;
 import net.scapeemulator.game.msg.impl.inter.InterfaceTextMessage;
+import net.scapeemulator.game.net.game.GameSession;
 
 public final class Player extends Mob {
 

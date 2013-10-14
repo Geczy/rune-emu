@@ -22,8 +22,8 @@
 
 package net.scapeemulator.game.model.grounditem;
 
-import net.scapeemulator.game.model.grounditem.GroundItemList.Type;
 import net.scapeemulator.game.model.grounditem.GroundItemList.GroundItem;
+import net.scapeemulator.game.model.grounditem.GroundItemList.Type;
 
 /**
  * Created by Hadyn Richard

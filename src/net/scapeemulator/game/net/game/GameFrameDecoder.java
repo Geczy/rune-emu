@@ -7,7 +7,6 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import net.scapeemulator.game.net.game.GameFrame.Type;
 import net.scapeemulator.util.crypto.StreamCipher;
 
-import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

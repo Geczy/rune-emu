@@ -1,7 +1,9 @@
 package net.scapeemulator.game.model.mob;
 
-import net.scapeemulator.game.model.*;
+import net.scapeemulator.game.model.Entity;
+import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.SpotAnimation;
+import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.model.pathfinding.Path;
 import net.scapeemulator.game.model.player.Player;
 import net.scapeemulator.game.model.player.SkillSet;

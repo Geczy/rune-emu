@@ -1,11 +1,11 @@
 package net.scapeemulator.game.model.mob;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.scapeemulator.game.model.Position;
 import net.scapeemulator.game.model.World;
 import net.scapeemulator.game.model.pathfinding.TraversalMap;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public enum Direction {
 
